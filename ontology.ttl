@@ -1,0 +1,340 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix gbfs: <http://vocab.gbfs.org/terms#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix cc: <http://creativecommons.org/ns#> .
+@prefix status: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix schema: <http://schema.org/> .
+#the deprecated vocabulary we're still linking to - https://github.com/iand/vocab-transit/issues/4
+@prefix transit: <http://vocab.org/transit/terms/> .
+@prefix vcard: <https://www.w3.org/2006/vcard/ns#> .
+
+<http://vocab.gbfs.org/terms> a foaf:Document ;
+                              foaf:primaryTopic <http://vocab.gbfs.org/terms#> ;
+                              dct:issued "2018-07-31"^^xsd:date ;
+                              dct:modified "2018-07-31"^^xsd:date ;
+                              dct:hasFormat <https://raw.githubusercontent.com/OpenTransport/vocabulary/master/gbfs/gbfs.ttl> ; # WHAT TO USE?
+                              cc:license <http://creativecommons.org/licenses/by/3.0/> ;
+                              dct:rights "Copyright 2018 - Open Transport contributors" . # OTHER COPYRIGHT?
+
+<http://vocab.gbfs.org/terms#> a owl:Ontology ;
+                               rdfs:label "General Bikeshare Feed Specification"@en ;
+                               dct:description "This ontology is a translation of the General Bikeshare Feed Specification towards URIs. Its intended use is creating an exchange platform where the Linked GBFS model can be used as a start to get the right data into the right format. For semantics of the classes and properties, see https://github.com/NABSA/gbfs/blob/master/gbfs.md."@en ;
+                               vann:preferredNamespacePrefix "gbfs" ;
+                               vann:preferredNamespaceUri "http://vocab.gbfs.org/terms#";
+                               rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md> ;
+                               dct:creator [ foaf:mbox "Amory.Hoste@UGent.be"; foaf:name "Amory Hoste" ] . # WHAT NAMES SHOULD I USE?
+
+gbfs:Feed a rdfs:Class ;
+          status:term_status "unstable"@en ;
+          rdfs:subClassOf dcat:Dataset ;
+          rdfs:label "GBFS Feed"@en ;
+          rdfs:comment "An instance of a gbfs:Feed is a linked GBFS feed that complies to this specification."@en ;
+          rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#files> ;
+          dcat:theme <http://eurovoc.europa.eu/2015> .
+
+gbfs:ttl a rdf:Property ;
+             status:term_status "unstable"@en ;
+             rdfs:subPropertyOf dct:Period ;
+             rdfs:label "Time to live"@en ;
+             rdfs:comment "Integer representing the number of seconds before the data in this feed will be updated again"@en ;
+             rdfs:seeAlso <https://github.com/amohoste/gbfs/blob/master/gbfs.md#system_informationjson> ;
+             rdfs:domain gbfs:Feed ;
+             rdfs:range xsd:integer .	
+
+gbfs:System a rdfs:Class ;
+            status:term_status "unstable"@en ;
+            rdfs:subClassOf foaf:Agent ;
+            rdfs:label "Bike share system"@en ;
+            rdfs:comment "A system rents bikes during a certain time-period."@en .
+
+gbfs:system_id a rdf:Property ;
+              status:term_status "unstable"@en ;
+              rdfs:label "System ID"@en ;
+              rdfs:comment "ID field - identifier for this bike share system."@en ;
+              rdfs:domain gbfs:System ;
+              rdfs:seeAlso <https://github.com/amohoste/gbfs/blob/master/gbfs.md#system_informationjson> ;
+              rdfs:subPropertyOf dct:identifier .
+
+gbfs:name a rdf:Property ;
+               status:term_status "unstable"@en ;
+               rdfs:label "Full name"@en ;
+               rdfs:comment "Full name of the system to be displayed to customers."@en ;
+               rdfs:seeAlso <https://github.com/amohoste/gbfs/blob/master/gbfs.md#system_informationjson> ;
+               rdfs:subPropertyOf dct:title ;
+               rdfs:domain gbfs:System .
+
+gbfs:short_name a rdf:Property ;
+               status:term_status "unstable"@en ;
+               rdfs:label "Short name"@en ;
+               rdfs:comment "Optional abbreviation for a system."@en ;
+               rdfs:seeAlso <https://github.com/amohoste/gbfs/blob/master/gbfs.md#system_informationjson> ;
+               rdfs:subPropertyOf dct:title ;
+               rdfs:domain gbfs:System .
+
+gbfs:short_name a rdf:Property ;
+               status:term_status "unstable"@en ;
+               rdfs:label "Short name"@en ;
+               rdfs:comment "Short name or other type of identifier."@en ;
+               rdfs:seeAlso <https://github.com/amohoste/gbfs/blob/master/gbfs.md#system_informationjson>,
+                            <https://github.com/NABSA/gbfs/blob/master/gbfs.md#station_informationjson>;
+               rdfs:subPropertyOf dct:title ;
+               rdfs:domain gbfs:System, gbfs:Station .
+
+gbfs:operator a rdf:Property ;
+               status:term_status "unstable"@en ;
+               rdfs:label "Operator"@en ;
+               rdfs:comment "Name of the operator of the system."@en ;
+               rdfs:seeAlso <https://github.com/amohoste/gbfs/blob/master/gbfs.md#system_informationjson> ;
+               rdfs:domain gbfs:System .
+
+gbfs:url a rdf:Property ;
+               status:term_status "unstable"@en ;
+               rdfs:label "Url"@en ;
+               rdfs:comment "The URL of the bike share system."@en ;
+               rdfs:seeAlso <https://github.com/amohoste/gbfs/blob/master/gbfs.md#system_informationjson> ;
+               rdfs:domain gbfs:System .
+
+gbfs:purchase_url a rdf:Property ;
+             status:term_status "unstable"@en ;
+             rdfs:subPropertyOf foaf:page ;
+             rdfs:label "purchase URL"@en ;
+             rdfs:comment "A fully qualified URL where a customer can purchase a membership or learn more about purchasing memberships"@en ;
+             rdfs:seeAlso <https://github.com/amohoste/gbfs/blob/master/gbfs.md#system_informationjson> ;
+             rdfs:domain gbfs:System .
+
+gbfs:start_date a rdf:Property ;
+             status:term_status "unstable"@en ;
+             rdfs:subPropertyOf dct:created ;
+             rdfs:label "start date"@en ;
+             rdfs:comment "Represents the date that the system began operations"@en ;
+             rdfs:seeAlso <https://github.com/amohoste/gbfs/blob/master/gbfs.md#system_informationjson> ;
+             rdfs:domain gbfs:System .	
+
+gbfs:license_url a rdf:Property ;
+             status:term_status "unstable"@en ;
+             rdfs:subPropertyOf foaf:page ;
+             rdfs:label "license URL"@en ;
+             rdfs:comment "A fully qualified URL of a page that defines the license terms for the GBFS data for this system, as well as any other license terms the system would like to define"@en ;
+             rdfs:seeAlso <https://github.com/amohoste/gbfs/blob/master/gbfs.md#system_informationjson> ;
+             rdfs:domain gbfs:System .
+
+gbfs:Station a rdfs:Class ;
+            status:term_status "unstable"@en ;
+            rdfs:label "Station"@en ;
+            rdfs:comment "A public bike sharing station"@en .
+
+gbfs:station_id a rdf:Property ;
+              status:term_status "unstable"@en ;
+              rdfs:label "Station ID"@en ;
+              rdfs:comment "Unique identifier of a station."@en ;
+              rdfs:domain gbfs:Station ;
+              rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#station_informationjson> ;
+              rdfs:subPropertyOf dct:identifier .
+
+gbfs:address  a rdf:Property ;
+              status:term_status "unstable"@en ;
+              owl:equivalentProperty vcard:street-address ;
+              rdfs:label "Address"@en ;
+              rdfs:comment "Valid street number and name where station is located."@en ;
+              rdfs:domain gbfs:Station ;
+              rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#station_informationjson> .
+
+gbfs:cross_street  a rdf:Property ;
+              status:term_status "unstable"@en ;
+              rdfs:subPropertyOf vcard:street-address ;
+              rdfs:label "Cross street"@en ;
+              rdfs:comment "Cross street of where the station is located."@en ;
+              rdfs:domain gbfs:Station ;
+              rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#station_informationjson> .
+
+gbfs:region_id a rdf:Property ;
+              status:term_status "unstable"@en ;
+              rdfs:label "Station ID"@en ;
+              rdfs:comment "Unique identifier of a station."@en ;
+              rdfs:domain gbfs:Station ;
+              rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#station_informationjson> ;
+              rdfs:subPropertyOf dct:identifier .
+
+gbfs:rental_method a rdfs:Class ;
+               status:term_status "unstable"@en ;
+               rdfs:label "Rental method"@en ;
+               rdfs:comment "Payment method accepted at a certain station"@en ;
+               rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#station_informationjson> .
+
+gbfs:KEY a gbfs:rental_method ;
+               status:term_status "unstable"@en ;
+               rdfs:label "Key"@en ;
+               rdfs:comment "i.e. operator issued bike key / fob / card"@en .
+
+gbfs:CREDITCARD a gbfs:rental_method ;
+               status:term_status "unstable"@en ;
+               rdfs:label "Creditcard"@en .
+
+gbfs:PAYPASS a gbfs:rental_method ;
+               status:term_status "unstable"@en ;
+               rdfs:label "Paypass"@en .
+
+gbfs:APPLEPAY a gbfs:rental_method ;
+               status:term_status "unstable"@en ;
+               rdfs:label "Credit card"@en .
+
+gbfs:ANDROIDPAY a gbfs:rental_method ;
+               status:term_status "unstable"@en ;
+               rdfs:label "Android Pay"@en .
+
+gbfs:TRANSITCARD a gbfs:rental_method ;
+               status:term_status "unstable"@en ;
+               rdfs:label "Transit Card"@en .
+
+gbfs:ACCOUNTNUMBER a gbfs:rental_method ;
+               status:term_status "unstable"@en ;
+               rdfs:label "Account Number"@en .
+
+gbfs:PHONE a gbfs:rental_method ;
+               status:term_status "unstable"@en ;
+               rdfs:label "Phone"@en .
+
+gbfs:capacity a rdf:Property ;
+              status:term_status "unstable"@en ;
+              rdfs:label "Capacity"@en ;
+              rdfs:comment "Number of total docking points installed at this station, both available and unavailable"@en ;
+              rdfs:domain gbfs:Station ;
+              rdfs:range xsd:integer ;
+              rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#station_informationjson> .
+
+gbfs:num_bikes_available a rdf:Property ;
+              status:term_status "unstable"@en ;
+              rdfs:label "Number of bikes available"@en ;
+              rdfs:comment "Number of bikes available for rental"@en ;
+              rdfs:domain gbfs:Station ;
+              rdfs:range xsd:integer ;
+              rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#station_statusjson> .
+
+gbfs:num_bikes_disabled a rdf:Property ;
+              status:term_status "unstable"@en ;
+              rdfs:label "Number of bikes available"@en ;
+              rdfs:comment "Number of bikes available for rental"@en ;
+              rdfs:domain gbfs:Station ;
+              rdfs:range xsd:integer ;
+              rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#station_statusjson> .
+
+gbfs:num_docks_available a rdf:Property ;
+              status:term_status "unstable"@en ;
+              rdfs:label "Number of docks available"@en ;
+              rdfs:comment "Number of docks accepting bike returns"@en ;
+              rdfs:domain gbfs:Station ;
+              rdfs:range xsd:integer ;
+              rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#station_statusjson> .
+
+gbfs:num_docks_disabled a rdf:Property ;
+              status:term_status "unstable"@en ;
+              rdfs:label "Number of disabled docks"@en ;
+              rdfs:comment "Number of empty but disabled dock points at the station."@en ;
+              rdfs:domain gbfs:Station ;
+              rdfs:range xsd:integer ;
+              rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#station_statusjson> .
+
+gbfs:is_installed a rdf:Property ;
+              status:term_status "unstable"@en ;
+              rdfs:label "Is dock installed"@en ;
+              rdfs:comment "Indicates whether the station is currently on the street"@en ;
+              rdfs:domain gbfs:Station ;
+              rdfs:range xsd:boolean ;
+              rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#station_statusjson> .
+
+gbfs:is_renting a rdf:Property ;
+              status:term_status "unstable"@en ;
+              rdfs:label "Is dock installed"@en ;
+              rdfs:comment "Indicates whether the station is currently renting bikes"@en ;
+              rdfs:domain gbfs:Station ;
+              rdfs:range xsd:boolean ;
+              rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#station_statusjson> .
+
+gbfs:is_returning a rdf:Property ;
+              status:term_status "unstable"@en ;
+              rdfs:label "Is dock installed"@en ;
+              rdfs:comment "Indicates whether the station is currently accepting bike returns"@en ;
+              rdfs:domain gbfs:Station ;
+              rdfs:range xsd:boolean ;
+              rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#station_statusjson> .
+
+gbfs:last_reported a rdf:Property ;
+              status:term_status "unstable"@en ;
+              rdfs:label "Last date the system reported it's status update to backend"@en ;
+              rdfs:comment "Integer POSIX timestamp indicating the last time this station reported its status to the backend"@en ;
+              rdfs:domain gbfs:Station ;
+              rdfs:range xsd:integer ;
+              rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#station_statusjson> .
+
+gbfs:Bike a rdfs:Class ;
+            status:term_status "unstable"@en ;
+            rdfs:label "bike"@en ;
+            rdfs:comment "A bike"@en .
+
+gbfs:bike_id a rdf:Property ;
+              status:term_status "unstable"@en ;
+              rdfs:label "Bike ID"@en ;
+              rdfs:comment "Unique identifier of a bike"@en ;
+              rdfs:domain gbfs:Bike ;
+              rrdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#free_bike_statusjson> ;
+              rdfs:subPropertyOf dct:identifier .
+
+gbfs:is_reserved a rdf:Property ;
+              status:term_status "unstable"@en ;
+              rdfs:label "Is bike reserved"@en ;
+              rdfs:comment "Indicates whether the bike is currently reserved for someone else"@en ;
+              rdfs:domain gbfs:Bike ;
+              rdfs:range xsd:boolean ;
+              rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#free_bike_statusjson> .
+
+gbfs:is_disabled a rdf:Property ;
+              status:term_status "unstable"@en ;
+              rdfs:label "Is bike disabled"@en ;
+              rdfs:comment "Indicates whether the bike is currently disabled (broken)"@en ;
+              rdfs:domain gbfs:Bike ;
+              rdfs:range xsd:boolean ;
+              rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#free_bike_statusjson> .
+
+gbfs:rental_hour_member a rdf:Property ;
+               status:term_status "unstable"@en ;
+               rdfs:label "Rental hours members"@en ;
+               rdfs:comment "String indicating the rental hours for members on a certain day, format: 'day hh:mm:ss - hh:mm:ss' with day the abbreviation of the first 3 letter of the given day, eig. mon."@en ;
+               rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#system_hoursjson> ;
+               rdfs:subPropertyOf xsd:duration ;
+               rdfs:domain gbfs:System 
+               rdfs:range xsd:string.
+
+gbfs:rental_hour_non_member a rdf:Property ;
+               status:term_status "unstable"@en ;
+               rdfs:label "Rental hours members"@en ;
+               rdfs:comment "String indicating the rental hours for members on a certain day, format: 'day hh:mm:ss - hh:mm:ss' with day the abbreviation of the first 3 letter of the given day, eig. mon."@en ;
+               rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#system_hoursjson> ;
+               rdfs:subPropertyOf xsd:duration ;
+               rdfs:domain gbfs:System 
+               rdfs:range xsd:string.
+
+gbfs:calendar a rdf:Property ;
+               status:term_status "unstable"@en ;
+               rdfs:label "System operating calendar"@en ;
+               rdfs:comment "Describes the operating calendar for a system. A system can have multiple calendars. Format: DD:MM:YYYY - DD:MM:YYYY"@en ;
+               rdfs:seeAlso <https://github.com/amohoste/gbfs/blob/master/gbfs.md#system_informationjson> ;
+               rdfs:subPropertyOf xsd:duration ;
+               rdfs:domain gbfs:System 
+               rdfs:range xsd:string.
+
+gbfs:calendar a rdf:Property ;
+               status:term_status "unstable"@en ;
+               rdfs:label "System operating calendar"@en ;
+               rdfs:comment "Describes the operating calendar for a system. A system can have multiple calendars. Format: DD:MM:YYYY - DD:MM:YYYY"@en ;
+               rdfs:seeAlso <https://github.com/amohoste/gbfs/blob/master/gbfs.md#system_informationjson> ;
+               rdfs:subPropertyOf xsd:duration ;
+               rdfs:domain gbfs:System 
+               rdfs:range xsd:string.
