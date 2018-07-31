@@ -334,7 +334,82 @@ gbfs:calendar a rdf:Property ;
                status:term_status "unstable"@en ;
                rdfs:label "System operating calendar"@en ;
                rdfs:comment "Describes the operating calendar for a system. A system can have multiple calendars. Format: DD:MM:YYYY - DD:MM:YYYY"@en ;
-               rdfs:seeAlso <https://github.com/amohoste/gbfs/blob/master/gbfs.md#system_informationjson> ;
+               rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#system_calendarjson> ;
                rdfs:subPropertyOf xsd:duration ;
                rdfs:domain gbfs:System 
                rdfs:range xsd:string.
+
+gbfs:Plan a rdfs:Class ;
+            status:term_status "unstable"@en ;
+            rdfs:label "Pricing plan"@en ;
+            rdfs:comment "Describes the pricing of a system"en ;
+            rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#system_pricing_plansjson> .
+
+gbfs:plan_id a rdf:Property ;
+              status:term_status "unstable"@en ;
+              rdfs:label "Plan ID"@en ;
+              rdfs:comment "A unique identifier for a plan in the system"@en ;
+              rdfs:domain gbfs:Plan ;
+              rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#system_pricing_plansjson> ;
+              rdfs:subPropertyOf dct:identifier .
+
+gbfs:currency a rdf:Property ;
+              status:term_status "unstable"@en ;
+              rdfs:label "Currency"@en ;
+              rdfs:comment "Currency the pricing plan is in"@en ;
+              rdfs:domain gbfs:Plan ;
+              rdfs:range xsd:string ;
+              rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#system_pricing_plansjson> .
+
+gbfs:price a rdf:Property ;
+              status:term_status "unstable"@en ;
+              rdfs:label "Price"@en ;
+              rdfs:comment "Fee for this plan"@en ;
+              rdfs:domain gbfs:Plan ;
+              rdfs:range xsd:double ;
+              rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#system_pricing_plansjson> .
+
+gbfs:is_taxable a rdf:Property ;
+              status:term_status "unstable"@en ;
+              rdfs:label "Is plan taxable"@en ;
+              rdfs:comment "Indicates whether the plan is taxable"@en ;
+              rdfs:domain gbfs:Plan ;
+              rdfs:range xsd:boolean ;
+              rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#system_pricing_plansjson> .
+
+gbfs:Alert a rdfs:Class ;
+            status:term_status "unstable"@en ;
+            rdfs:label "Alert"@en ;
+            rdfs:comment "Informs customers about changes to the system that do not fall within the normal system operations"en ;
+            rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#system_alertsjson> .
+
+gbfs:plan_id a rdf:Property ;
+              status:term_status "unstable"@en ;
+              rdfs:label "Plan ID"@en ;
+              rdfs:comment "Unique identifier for this alert"@en ;
+              rdfs:domain gbfs:Alert ;
+              rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#system_alertsjson> ;
+              rdfs:subPropertyOf dct:identifier .
+
+gbfs:alert_type a rdfs:Class ;
+               status:term_status "unstable"@en ;
+               rdfs:label "Alert type"@en ;
+               rdfs:comment "Type of alert"@en ;
+               rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#system_alertsjson>  .
+
+gbfs:SYSTEM_CLOSURE a gbfs:alert_type ;
+               status:term_status "unstable"@en ;
+               rdfs:label "System closure"@en .
+
+gbfs:STATION_CLOSURE a gbfs:alert_type ;
+               status:term_status "unstable"@en ;
+               rdfs:label "Station closure"@en .
+
+gbfs:STATION_MOVE a gbfs:alert_type ;
+               status:term_status "unstable"@en ;
+               rdfs:label "Station move"@en .
+
+gbfs:OTHER a gbfs:alert_type ;
+               status:term_status "unstable"@en ;
+               rdfs:label "Other"@en .
+
