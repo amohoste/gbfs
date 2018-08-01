@@ -6,7 +6,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix vann: <http://purl.org/vocab/vann/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-@prefix gbfs: <example.com/terms#> .
+@prefix gbfs: <http://example.com/terms#> .
 @prefix dcat: <http://www.w3.org/ns/dcat#> .
 @prefix vann: <http://purl.org/vocab/vann/> .
 @prefix cc: <http://creativecommons.org/ns#> .
@@ -18,7 +18,7 @@
 @prefix transit: <http://vocab.org/transit/terms/> .
 
 <http://example.com/terms> a foaf:Document ;
-                              foaf:primaryTopic <example.com/terms#> ;
+                              foaf:primaryTopic <http://example.com/terms#> ;
                               dct:issued "2018-07-31"^^xsd:date ;
                               dct:modified "2018-07-31"^^xsd:date ;
                               cc:license <http://creativecommons.org/licenses/by/3.0/> ;
