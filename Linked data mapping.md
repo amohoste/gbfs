@@ -18,7 +18,7 @@ Every JSON file presented in this specification contains the same common header 
 
 Field Name          | Required  | Linked Data
 --------------------| ----------| ----------
-last_updated        | Yes       | dcterms:modified
+last_updated        | Yes       | dct:modified
 ttl                 | Yes       | gbfs:ttl
 data                | Yes       | Left out
 
@@ -106,18 +106,11 @@ bikes             | Left out
 
 Field Name          | RDefines
 --------------------| ----------
-rental_hours        | gbfs:rental_hour_member and gbfs:rental_hour_non_member
-\- user_types        | replaced by gbfs:rental_hour_member and gbfs:rental_hour_non_member
-\- days              | replaced by gbfs:rental_hour_member and gbfs:rental_hour_non_member
-\- start_time        | replaced by gbfs:rental_hour_member and gbfs:rental_hour_non_member
-\- end_time          | replaced by gbfs:rental_hour_member and gbfs:rental_hour_non_member
-
-Rental hours can be expressed as following:
-
-```
-<example.com/system_1> gbfs:rental_hour_member "mon 08:00:00 - 18:00:00"
-<example.com/system_1> gbfs:rental_hour_member "mon 07:30:00 - 18:30:00"
-```
+rental_hours       | gbfs:rental_hour
+\- user_types        | gbfs:is_member
+\- days              | gbfs:day
+\- start_time        | gbfs:start_time
+\- end_time          | gbfs:end_time
 
 ### system_calendar.json
 
@@ -152,22 +145,22 @@ plans             | Left out
 \- description     | rdfs:comment
 
 ### system_alerts.json
-> A class gbfs:Plan has been added to describe an alert
+> A class gbfs:Alert has been added to describe an alert
 
 Field Name        | Defines
 ----------------- | ----------
 alerts            | Left out
 \- alert_id        | gbfs:alert_id
 \- type            | gbfs:alert_type - valid values are: <ul><li>gbfs:SYSTEM_CLOSURE</li> <li>gbfs:STATION_CLOSURE</li> <li>gbfs:STATION_MOVE</li> <li>gbfs:OTHER</li> </ul>
-\- times           | Array of hashes with the keys "start" and "end" indicating when the alert is in effect (e.g. when the system or station is actually closed, or when it is scheduled to be moved). If this array is omitted then the alert should be displayed as long as it is in the feed.
-&emsp;- start     | Integer POSIX timestamp - required if container "times" key is present
-&emsp;- end       | Integer POSIX timestamp - if there is currently no end time planned for the alert, this key can be omitted indicating that there is no currently scheduled end time for the alert
-\- station_ids     | Array of strings - If this is an alert that affects one or more stations, include their ids, otherwise omit this field. If both station_ids and region_ids are omitted, assume this alert affects the entire system
-\- region_ids      | Array of strings - If this system has regions, and if this alert only affects certain regions, include their ids, otherwise, omit this field. If both station_ids and region_ids are omitted, assume this alert affects the entire system
-\- url             | String - URL where the customer can learn more information about this alert, if there is one
-\- summary         | String - A short summary of this alert to be displayed to the customer
-\- description     | String - Detailed text description of the alert
-\- last_updated    | Integer POSIX timestamp indicating the last time the info for the particular alert was updated
+\- times           | gbfs:alert_time
+&emsp;- start     | gbfs:start
+&emsp;- end       | gbfs:end
+\- station_ids     | gbfs:station_id
+\- region_ids      | gbfs:region_id
+\- url             | gbfs:url
+\- summary         | dct:abstract
+\- description     | rdfs:comment
+\- last_updated    | dct:modified
 
 
 ## Disclaimers
