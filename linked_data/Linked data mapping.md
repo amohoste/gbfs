@@ -115,6 +115,7 @@ rental_hours       | gbfs:rental_hour
 
 ### system_calendar.json
 
+> A class gbfs:Calendar has been added
 
 Field Name          |  Defines
 --------------------| ----------
@@ -152,8 +153,8 @@ Field Name        | Defines
 ----------------- | ----------
 alerts            | Left out
 \- alert_id        | gbfs:alert_id
-\- type            | gbfs:alert_type - valid values are: <ul><li>gbfs:SYSTEM_CLOSURE</li> <li>gbfs:STATION_CLOSURE</li> <li>gbfs:STATION_MOVE</li> <li>gbfs:OTHER</li> </ul>
-\- times           | gbfs:alert_time
+\- type            | gbfs:AlertType - valid values are: <ul><li>gbfs:SYSTEM_CLOSURE</li> <li>gbfs:STATION_CLOSURE</li> <li>gbfs:STATION_MOVE</li> <li>gbfs:OTHER</li> </ul>
+\- times           | gbfs:AlertTime
 &emsp;- start     | gbfs:start
 &emsp;- end       | gbfs:end
 \- station_ids     | gbfs:station_id

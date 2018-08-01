@@ -6,7 +6,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix vann: <http://purl.org/vocab/vann/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-@prefix gbfs: <http://vocab.gbfs.org/terms#> .
+@prefix gbfs: <example.com/terms#> .
 @prefix dcat: <http://www.w3.org/ns/dcat#> .
 @prefix vann: <http://purl.org/vocab/vann/> .
 @prefix cc: <http://creativecommons.org/ns#> .
@@ -17,19 +17,18 @@
 #the deprecated vocabulary we're still linking to - https://github.com/iand/vocab-transit/issues/4
 @prefix transit: <http://vocab.org/transit/terms/> .
 
-<http://vocab.gbfs.org/terms> a foaf:Document ;
-                              foaf:primaryTopic <http://vocab.gbfs.org/terms#> ;
+<http://example.com/terms> a foaf:Document ;
+                              foaf:primaryTopic <example.com/terms#> ;
                               dct:issued "2018-07-31"^^xsd:date ;
                               dct:modified "2018-07-31"^^xsd:date ;
-                              dct:hasFormat <https://raw.githubusercontent.com/OpenTransport/vocabulary/master/gbfs/gbfs.ttl> ; # WHAT TO USE?
                               cc:license <http://creativecommons.org/licenses/by/3.0/> ;
                               dct:rights "Copyright 2018 - Open Transport contributors" . # OTHER COPYRIGHT?
 
-<http://vocab.gbfs.org/terms#> a owl:Ontology ;
+<http://example.com/terms#> a owl:Ontology ;
                                rdfs:label "General Bikeshare Feed Specification"@en ;
                                dct:description "This ontology is a translation of the General Bikeshare Feed Specification towards URIs. Its intended use is creating an exchange platform where the Linked GBFS model can be used as a start to get the right data into the right format. For semantics of the classes and properties, see https://github.com/NABSA/gbfs/blob/master/gbfs.md."@en ;
                                vann:preferredNamespacePrefix "gbfs" ;
-                               vann:preferredNamespaceUri "http://vocab.gbfs.org/terms#";
+                               vann:preferredNamespaceUri "http://example.com/terms#";
                                rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md> ;
                                dct:creator [ foaf:mbox "Amory.Hoste@UGent.be"; foaf:name "Amory Hoste" ] . # WHAT NAMES SHOULD I USE?
 
@@ -448,7 +447,7 @@ gbfs:calendar a rdf:Property ;
                rdfs:domain gbfs:System ;
                rdfs:range xsd:calendar .
 
-gbfs:calendar a rdfs:Class ;
+gbfs:Calendar a rdfs:Class ;
                status:term_status "unstable"@en ;
                rdfs:label "Calendar"@en ;
                rdfs:comment "Describes the system operational calendar"@en ;
@@ -540,7 +539,7 @@ gbfs:alert_id a rdf:Property ;
               rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#system_alertsjson> ;
               rdfs:subPropertyOf dct:identifier .
 
-gbfs:alert_type a rdf:Property ;
+gbfs:alertType a rdf:Property ;
               status:term_status "unstable"@en ;
               rdfs:label "Alert type"@en ;
               rdfs:comment "Alert type"@en ;
@@ -548,7 +547,7 @@ gbfs:alert_type a rdf:Property ;
               rdfs:range xsd:alert_type ;
               rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#system_alertsjson>  .
 
-gbfs:alert_type a rdfs:Class ;
+gbfs:AlertType a rdfs:Class ;
                status:term_status "unstable"@en ;
                rdfs:label "Alert type"@en ;
                rdfs:comment "Type of alert"@en ;
@@ -570,13 +569,13 @@ gbfs:OTHER a gbfs:alert_type ;
                status:term_status "unstable"@en ;
                rdfs:label "Other"@en .
 
-gbfs:alert_time a rdfs:Class ;
+gbfs:AlertTime a rdfs:Class ;
                status:term_status "unstable"@en ;
                rdfs:label "Alert time"@en ;
                rdfs:comment "Has a start and end time, indicates when the alert is in effect."@en ;
                rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#system_alertsjson>  .
 
-gbfs:alert_time a rdf:Property ;
+gbfs:alertTime a rdf:Property ;
               status:term_status "unstable"@en ;
               rdfs:label "Alert time"@en ;
               rdfs:comment "Alert time belonging to an alert"@en ;
