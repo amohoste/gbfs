@@ -1,4 +1,4 @@
-# General Bikeshare Feed Specification (GBFS) Mapping
+# General Bikeshare Feed Specification (GBFS) Linked Data Mapping
 
 
 ## Files
@@ -18,7 +18,7 @@ Every JSON file presented in this specification contains the same common header 
 
 Field Name          | Required  | Linked Data
 --------------------| ----------| ----------
-last_updated        | Yes       | dct:modified
+last_updated        | Yes       | gbfs:last_updated
 ttl                 | Yes       | gbfs:ttl
 data                | Yes       | Left out
 
@@ -28,9 +28,9 @@ data                | Yes       | Left out
 
 Field Name              | Linked Data
 ------------------------| ----------
-_language_ **use standard tag** | Use language tags
+language  | Use language tags
   \- feeds               | Can be represented using gbfs:Feed
-  \- name                | Left out
+  \- name                | gbfs:name
   \- url                 | Left out
 
 
@@ -41,7 +41,7 @@ _language_ **use standard tag** | Use language tags
 Field Name        | Linked data
 ------------------| ----------
 system_id         | gbfs:system_id 
-language          | gbfs:language
+language          | Use language tags
 name              | gbfs:name
 short_name        | gbfs:short_name
 operator          | gbfs:operator
@@ -63,6 +63,7 @@ Field Name        | Linked data
 ------------------| ----------
 stations          | Left out
 \- station_id      | gbfs:station_id
+\- name            | gbfs:name
 \- short_name      | gbfs:short_name
 \- lat             | geo:lat
 \- lon             | geo:long
@@ -70,7 +71,7 @@ stations          | Left out
 \- cross_street    | gbfs:cross_street 
 \- region_id       | vcard:region
 \- post_code       | vcard:postal-code
-\- rental_methods  | Class: gbfs:rental_method, subclasses:<br /><ul><li>gbfs:KEY </li> <li>gbfs:CREDITCARD</li> <li>gbfs:PAYPASS</li> <li>gbfs:APPLEPAY</li> <li>gbfs:ANDROIDPAY</li> <li>gbfs:TRANSITCARD</li> <li>gbfs:ACCOUNTNUMBER</li> <li>gbfs:PHONE</li> </ul>
+\- rental_methods  | Class: gbfs:RentalMethod, subclasses:<br /><ul><li>gbfs:KEY </li> <li>gbfs:CREDITCARD</li> <li>gbfs:PAYPASS</li> <li>gbfs:APPLEPAY</li> <li>gbfs:ANDROIDPAY</li> <li>gbfs:TRANSITCARD</li> <li>gbfs:ACCOUNTNUMBER</li> <li>gbfs:PHONE</li> </ul>
 \- capacity        | gbfs:capacity
 
 ### station_status.json
@@ -118,12 +119,12 @@ rental_hours       | gbfs:rental_hour
 Field Name          |  Defines
 --------------------| ----------
 calendars           |  gbfs:calendar 
-\- start_month       | Replaced by gbfs:calendar
-\- start_day         | Replaced by gbfs:calendar
-\- start_year        | Replaced by gbfs:calendar
-\- end_month         | Replaced by gbfs:calendar
-\- end_day           | Replaced by gbfs:calendar
-\- end_year          | Replaced by gbfs:calendar
+\- start_month       | gbfs:start_date
+\- start_day         | gbfs:start_date
+\- start_year        | gbfs:start_date
+\- end_month         | gbfs:end_date
+\- end_day           | gbfs:end_date
+\- end_year          | gbfs:end_date
 
 ### system_regions.json
 > Replaced by vcard:region
@@ -137,8 +138,8 @@ Field Name        | Defines
 ------------------| ----------
 plans             | Left out
 \- plan_id         | gbfs:plan_id
-\- url             | String - a fully qualified URL where the customer can learn more about this particular scheme
-\- name            | Name of this pricing scheme
+\- url             | gbfs:url
+\- name            | gbfs:name
 \- currency        | gbfs:currency
 \- price           | gbfs:price
 \- is_taxable      | gbfs:is_taxable
