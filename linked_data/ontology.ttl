@@ -61,6 +61,7 @@ gbfs:system_id a rdf:Property ;
               rdfs:label "System ID"@en ;
               rdfs:comment "ID field - identifier for this bike share system."@en ;
               rdfs:domain gbfs:System ;
+              rdfs:range xsd:string ;
               rdfs:seeAlso <https://github.com/amohoste/gbfs/blob/master/gbfs.md#system_informationjson> ;
               rdfs:subPropertyOf dct:identifier .
 
@@ -90,7 +91,8 @@ gbfs:operator a rdf:Property ;
                rdfs:label "Operator"@en ;
                rdfs:comment "Name of the operator of the system."@en ;
                rdfs:seeAlso <https://github.com/amohoste/gbfs/blob/master/gbfs.md#system_informationjson> ;
-               rdfs:domain gbfs:System .
+               rdfs:domain gbfs:System ;
+               rdfs:range xsd:string .
 
 gbfs:url a rdf:Property ;
                status:term_status "unstable"@en ;
@@ -110,7 +112,8 @@ gbfs:purchase_url a rdf:Property ;
              rdfs:label "purchase URL"@en ;
              rdfs:comment "A fully qualified URL where a customer can purchase a membership or learn more about purchasing memberships"@en ;
              rdfs:seeAlso <https://github.com/amohoste/gbfs/blob/master/gbfs.md#system_informationjson> ;
-             rdfs:domain gbfs:System .
+             rdfs:domain gbfs:System ;
+             rdfs:range xsd:string .
 
 gbfs:start_date a rdf:Property ;
              status:term_status "unstable"@en ;
@@ -289,7 +292,7 @@ gbfs:bike_id a rdf:Property ;
               rdfs:label "Bike ID"@en ;
               rdfs:comment "Unique identifier of a bike"@en ;
               rdfs:domain gbfs:Bike ;
-              rrdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#free_bike_statusjson> ;
+              rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#free_bike_statusjson> ;
               rdfs:subPropertyOf dct:identifier .
 
 gbfs:is_reserved a rdf:Property ;
@@ -319,7 +322,7 @@ gbfs:rental_hour a rdf:Property ;
 gbfs:RentalHour a rdfs:Class ;
             status:term_status "unstable"@en ;
             rdfs:label "Rental Hour"@en ;
-            rdfs:comment "Represent rental hours on a sepcific day"en ;
+            rdfs:comment "Represent rental hours on a sepcific day"@en ;
             rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#system_hoursjson> .
 
 gbfs:day a rdf:Property ;
@@ -331,59 +334,59 @@ gbfs:day a rdf:Property ;
                rdfs:range gbfs:WeekDay .
 
 gbfs:WeekDay a rdfs:Class ;
-            owl:equivalentClass day:DayOfWeek
+            owl:equivalentClass day:DayOfWeek ;
             status:term_status "unstable"@en ;
             rdfs:label "Week day"@en ;
-            rdfs:comment "Represents a week day"en ;
+            rdfs:comment "Represents a week day"@en ;
             rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#system_hoursjson> .
 
 gbfs:mon a gbfs:WeekDay ;
-            owl:equivalentClass day:Monday
+            owl:equivalentClass day:Monday ;
             status:term_status "unstable"@en ;
             rdfs:label "Monday"@en ;
-            rdfs:comment "The day monday"en ;
+            rdfs:comment "The day monday"@en ;
             rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#system_hoursjson> .
 
 gbfs:tue a gbfs:WeekDay ;
-            owl:equivalentClass day:Tuesday
+            owl:equivalentClass day:Tuesday ;
             status:term_status "unstable"@en ;
             rdfs:label "Tuesday"@en ;
-            rdfs:comment "The day tuesday"en ;
+            rdfs:comment "The day tuesday"@en ;
             rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#system_hoursjson> .
 
 gbfs:wed a gbfs:WeekDay ;
-            owl:equivalentClass day:Wednesday
+            owl:equivalentClass day:Wednesday ;
             status:term_status "unstable"@en ;
             rdfs:label "Wednesday"@en ;
-            rdfs:comment "The day wednesday"en ;
+            rdfs:comment "The day wednesday"@en ;
             rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#system_hoursjson> .
 
 gbfs:thu a gbfs:WeekDay ;
-            owl:equivalentClass day:Thursday
+            owl:equivalentClass day:Thursday ;
             status:term_status "unstable"@en ;
             rdfs:label "Thursday"@en ;
-            rdfs:comment "The day thursday"en ;
+            rdfs:comment "The day thursday"@en ;
             rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#system_hoursjson> .
 
 gbfs:fri a gbfs:WeekDay ;
-            owl:equivalentClass day:Friday
+            owl:equivalentClass day:Friday ;
             status:term_status "unstable"@en ;
             rdfs:label "Friday"@en ;
-            rdfs:comment "The day friday"en ;
+            rdfs:comment "The day friday"@en ;
             rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#system_hoursjson> .
 
 gbfs:sat a gbfs:WeekDay ;
-            owl:equivalentClass day:Saturday
+            owl:equivalentClass day:Saturday ;
             status:term_status "unstable"@en ;
             rdfs:label "Saturday"@en ;
-            rdfs:comment "The day saturday"en ;
+            rdfs:comment "The day saturday"@en ;
             rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#system_hoursjson> .
 
 gbfs:sun a gbfs:WeekDay ;
-            owl:equivalentClass day:Sunday
+            owl:equivalentClass day:Sunday ;
             status:term_status "unstable"@en ;
             rdfs:label "Sunday"@en ;
-            rdfs:comment "The day sunday"en ;
+            rdfs:comment "The day sunday"@en ;
             rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#system_hoursjson> .       
 
 gbfs:is_member a rdf:Property ;
@@ -431,7 +434,7 @@ gbfs:calendar a rdf:Property ;
 gbfs:Plan a rdfs:Class ;
             status:term_status "unstable"@en ;
             rdfs:label "Pricing plan"@en ;
-            rdfs:comment "Describes the pricing of a system"en ;
+            rdfs:comment "Describes the pricing of a system"@en ;
             rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#system_pricing_plansjson> .
 
 gbfs:plan_id a rdf:Property ;
@@ -469,7 +472,7 @@ gbfs:is_taxable a rdf:Property ;
 gbfs:Alert a rdfs:Class ;
             status:term_status "unstable"@en ;
             rdfs:label "Alert"@en ;
-            rdfs:comment "Informs customers about changes to the system that do not fall within the normal system operations"en ;
+            rdfs:comment "Informs customers about changes to the system that do not fall within the normal system operations"@en ;
             rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#system_alertsjson> .
 
 gbfs:plan_id a rdf:Property ;
@@ -541,3 +544,4 @@ gbfs:end a rdf:Property ;
               rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#system_alertsjson>  .
 
 
+              
