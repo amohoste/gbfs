@@ -1,0 +1,23 @@
+prefixes:
+  gbfs: "http://example.com/terms#"
+  ex: "http://example.com/"
+  geo: "http://www.w3.org/2003/01/geo/wgs84_pos#"
+
+mappings:
+  person:
+    sources:
+      - ['station_information.json~jsonpath', '$.data.stations[*]']
+    s: http://example.com/station/$(station_id)
+    po:
+      - [a, gbfs:Station]
+      - [gbfs:station_id, $(station_id)]
+      - [gbfs:name, $(name)]
+      - [gbfs:short_name, $(short_name)]
+      - [geo:lat, $(lat), xsd:double]
+      - [geo:long, $(lon), xsd:double]
+      - [geo:address, $(address)]
+      - [gbfs:cross_street, $(cross_street)]
+      - [gbfs:region_id, $(region_id), xsd:integer]
+      - [vcard:postal-code, $(post_code)]
+      - [gbfs:rental_method, ex:$(rental_methods)~iri] # TODO: use function
+      - [gbfs:capacity, $(capacity), xsd:integer]

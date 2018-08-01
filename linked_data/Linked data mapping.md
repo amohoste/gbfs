@@ -69,7 +69,7 @@ stations          | Left out
 \- lon             | geo:long
 \- address         | gbfs:address
 \- cross_street    | gbfs:cross_street 
-\- region_id       | vcard:region
+\- region_id       | gbfs:region_id
 \- post_code       | vcard:postal-code
 \- rental_methods  | Class: gbfs:RentalMethod, subclasses:<br /><ul><li>gbfs:KEY </li> <li>gbfs:CREDITCARD</li> <li>gbfs:PAYPASS</li> <li>gbfs:APPLEPAY</li> <li>gbfs:ANDROIDPAY</li> <li>gbfs:TRANSITCARD</li> <li>gbfs:ACCOUNTNUMBER</li> <li>gbfs:PHONE</li> </ul>
 \- capacity        | gbfs:capacity
