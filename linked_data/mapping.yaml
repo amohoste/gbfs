@@ -40,8 +40,13 @@ sources:
     access: system_alerts.json
     referenceFormulation: jsonpath
     iterator: $.data.alerts[*]
+  system_alerts_times_source:
+    access: system_alert.json
+    referenceFormulation: jsonpath
+    iterator: $.data.alerts[*].times[*]
 
-mappings: 
+mappings:
+  # System
   system_info:
     sources: system_information_source
     s: ex:system
@@ -59,6 +64,8 @@ mappings:
       - [foaf:mbox, $(email)]
       - [gbfs:timezone, $(timezone)]
       - [gbfs:license_url, $(license_url)]
+
+  # Link classes to system
   station_sys:
     sources: station_info_source
     s: ex:system
@@ -94,6 +101,8 @@ mappings:
     s: ex:system
     po:
       - [gbfs:alert, ex:alerts/$(alert_id)]
+
+  # Station
   station_info:
     sources: station_info_source
     s: ex:station/$(station_id)
@@ -122,6 +131,8 @@ mappings:
       - [gbfs:is_renting, $(is_renting), xsd:boolean]
       - [gbfs:is_returning, $(is_returning), xsd:boolean]
       - [gbfs:last_reported, $(last_reported), xsd:integer]
+
+  # Bike
   free_bike_status:
     sources: free_bike_status_source
     s: ex:bikes/$(bike_id)
@@ -131,6 +142,8 @@ mappings:
       - [geo:long, $(lon), xsd:double]
       - [gbfs:is_reserved , $(is_reserved), xsd:boolean]
       - [gbfs:is_disabled , $(is_disabled), xsd:boolean]
+
+  # System classes
   system_hours:
     sources: system_hours_source
     s: ex:system_hours/$(start_time) # Todo generate id by concatenating, need function?
@@ -140,7 +153,7 @@ mappings:
      - [gbfs:day, gbfs:$(days)~iri]
      - [gbfs:start_time, $(start_time), xsd:time]
      - [gbfs:end_time, $(end_time), xsd:time]
-  system_calendar: # Todo: linken aan system + hoe id genereren? adhv. concatenatie start en end dates?
+  system_calendar:
     sources: system_calendar_source
     s: ex:calendars/$(start_day)$(start_month)$(start_year)-$(end_day)$(end_month)$(end_year)
     po:
@@ -177,25 +190,23 @@ mappings:
       - [a, gbfs:Alert]
       - [gbfs:alert_id, $(alert_id)]
       - [gbfs:alertType, gbfs:$(type)~iri]
-      #- p: gbfs:alertTime
-      #  o: 
-      # times: todo
       - [gbfs:station, ex:stations/$(station_ids)~iri]
       - [gbfs:region, ex:regions/$(region_ids)]
       - [gbfs:url, $(url)]
       - [dcterms:abstract, $(summary)]
       - [rdfs:comment, $(description)]
       - [dcterms:modified, $(last_updated), xsd:integer]
- # alert_time:
-  #  sources: system_alerts_source
-   # s: ex:alerts/alert_times/ # change
-    #po:
-#
- #   sources:
-  #    - ['movies.csv~csv']
-   # s: http://example.com/movie/$(slug)
-    #po:
-     # - [a, schema:Movie]
-     # - [schema:name, $(title)]
-     # - [ex:year, $(year)]
-      
+      - p: gbfs:alertTime
+        o: 
+         - mapping: movie
+           condition:
+            function: equal
+            parameters:
+              - [str1, $(alert_id)]
+              - [str2, $(times_alert_id)] # TODO: insert times_alert_id for each alert before feeding to yarrrml
+    movie:
+    sources: system_alerts_times_source
+    s: ex:alerts/times/$(times_alert_id)-$(start)-$(end)
+    po:
+      - [gbfs:start, $(start), xsd:integer]
+      - [gbfs:end, $(end), xsd:integer]
