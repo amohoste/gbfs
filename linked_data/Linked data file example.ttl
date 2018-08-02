@@ -1,0 +1,934 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix ma: <http://www.w3.org/ns/ma-ont#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#>.
+@prefix dcterms: <http://purl.org/dc/terms/>.
+@prefix foaf: <http://xmlns.com/foaf/0.1/>.
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#>.
+@prefix schema: <http://schema.org/>.
+@prefix time: <http://www.w3.org/2006/time#>.
+@prefix gbfs: <http://example.com/terms#>.
+@prefix ex: <http://example.com/>.
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>.
+
+ex:system gbfs:plan <http://example.com/plans/1>, <http://example.com/plans/2>, <http://example.com/plans/3>, <http://example.com/plans/9>.
+<http://example.com/plans/1> a gbfs:Plan;
+    gbfs:plan_id "1";
+    gbfs:name "1-Day Pass";
+    gbfs:currency "AED";
+    gbfs:price "20"^^xsd:double;
+    gbfs:is_taxable "0"^^xsd:boolean;
+    rdfs:comment "Unlimited number of trips, first 60 minutes of each trip are included in the pass, after which additional usage fees apply. Make sure to dock the bike in before 60 minutes at any station to avoid usage charges.".
+<http://example.com/plans/2> a gbfs:Plan;
+    gbfs:plan_id "2";
+    gbfs:name "3-Day Pass";
+    gbfs:currency "AED";
+    gbfs:price "50"^^xsd:double;
+    gbfs:is_taxable "0"^^xsd:boolean;
+    rdfs:comment "Unlimited number of trips, first 60 minutes of each trip are included in the pass, after which additional usage fees apply. Make sure to dock the bike in before 60 minutes at any station to avoid usage charges.".
+<http://example.com/plans/3> a gbfs:Plan;
+    gbfs:plan_id "3";
+    gbfs:name "Monthly Membership";
+    gbfs:currency "AED";
+    gbfs:price "99"^^xsd:double;
+    gbfs:is_taxable "0"^^xsd:boolean;
+    rdfs:comment "Unlimited number of trips, first 60 minutes of each trip are included in the monthly membership, after which additional usage fees apply".
+<http://example.com/plans/9> a gbfs:Plan;
+    gbfs:plan_id "9";
+    gbfs:name "One Day Membership";
+    gbfs:currency "AED";
+    gbfs:price "20"^^xsd:double;
+    gbfs:is_taxable "0"^^xsd:boolean;
+    rdfs:comment "This is a One Day Membership for users of Abu Dhabi's Bikeshare network that allows unlimited number of 1 hour rides for a period of 24 hours. Please note, rides above 1 hour will incur additional usage charges".
+ex:system gbfs:region <egions/3>, <egions/5>, <egions/6>, <egions/7>, <egions/8>, <egions/9>.
+<http://example.com/regions/3> a gbfs:Region;
+    gbfs:region_id "3";
+    gbfs:name "Reem Island".
+<http://example.com/regions/5> a gbfs:Region;
+    gbfs:region_id "5";
+    gbfs:name "Al Raha ".
+<http://example.com/regions/6> a gbfs:Region;
+    gbfs:region_id "6";
+    gbfs:name "Yas Island".
+<http://example.com/regions/7> a gbfs:Region;
+    gbfs:region_id "7";
+    gbfs:name "Abu Dhabi City".
+<http://example.com/regions/8> a gbfs:Region;
+    gbfs:region_id "8";
+    gbfs:name "Masdar City".
+<http://example.com/regions/9> a gbfs:Region;
+    gbfs:region_id "9";
+    gbfs:name "Saadiat Island".
+ex:system gbfs:rental_hour <http://example.com/system_hours/00:00:00>, <http://example.com/system_hours/00:00:00>.
+<http://example.com/system_hours/00:00:00> a gbfs:RentalHour;
+    gbfs:user_type gbfs:member;
+    gbfs:day gbfs:mon, gbfs:tue, gbfs:wed, gbfs:thu, gbfs:fri, gbfs:sat, gbfs:sun;
+    gbfs:start_time "00:00:00"^^xsd:time;
+    gbfs:end_time "23:59:00"^^xsd:time;
+    a gbfs:RentalHour;
+    gbfs:user_type gbfs:nonmember;
+    gbfs:day gbfs:mon, gbfs:tue, gbfs:wed, gbfs:thu, gbfs:fri, gbfs:sat, gbfs:sun;
+    gbfs:start_time "00:00:00"^^xsd:time;
+    gbfs:end_time "23:59:00"^^xsd:time.
+<http://example.com/station/3> gbfs:num_bikes_available "2"^^xsd:integer;
+    gbfs:num_bikes_disabled "0"^^xsd:integer;
+    gbfs:num_docks_available "13"^^xsd:integer;
+    gbfs:num_docks_disabled "0"^^xsd:integer;
+    gbfs:is_installed "1"^^xsd:boolean;
+    gbfs:is_renting "1"^^xsd:boolean;
+    gbfs:is_returning "1"^^xsd:boolean;
+    gbfs:last_reported "1533136446"^^xsd:integer.
+<http://example.com/station/4> gbfs:num_bikes_available "4"^^xsd:integer;
+    gbfs:num_bikes_disabled "0"^^xsd:integer;
+    gbfs:num_docks_available "5"^^xsd:integer;
+    gbfs:num_docks_disabled "0"^^xsd:integer;
+    gbfs:is_installed "1"^^xsd:boolean;
+    gbfs:is_renting "1"^^xsd:boolean;
+    gbfs:is_returning "1"^^xsd:boolean;
+    gbfs:last_reported "1533170744"^^xsd:integer.
+<http://example.com/station/5> gbfs:num_bikes_available "2"^^xsd:integer;
+    gbfs:num_bikes_disabled "0"^^xsd:integer;
+    gbfs:num_docks_available "9"^^xsd:integer;
+    gbfs:num_docks_disabled "0"^^xsd:integer;
+    gbfs:is_installed "1"^^xsd:boolean;
+    gbfs:is_renting "1"^^xsd:boolean;
+    gbfs:is_returning "1"^^xsd:boolean;
+    gbfs:last_reported "1533171266"^^xsd:integer.
+<http://example.com/station/6> gbfs:num_bikes_available "6"^^xsd:integer;
+    gbfs:num_bikes_disabled "0"^^xsd:integer;
+    gbfs:num_docks_available "5"^^xsd:integer;
+    gbfs:num_docks_disabled "0"^^xsd:integer;
+    gbfs:is_installed "1"^^xsd:boolean;
+    gbfs:is_renting "1"^^xsd:boolean;
+    gbfs:is_returning "1"^^xsd:boolean;
+    gbfs:last_reported "1533169870"^^xsd:integer.
+<http://example.com/station/7> gbfs:num_bikes_available "5"^^xsd:integer;
+    gbfs:num_bikes_disabled "0"^^xsd:integer;
+    gbfs:num_docks_available "8"^^xsd:integer;
+    gbfs:num_docks_disabled "0"^^xsd:integer;
+    gbfs:is_installed "1"^^xsd:boolean;
+    gbfs:is_renting "1"^^xsd:boolean;
+    gbfs:is_returning "1"^^xsd:boolean;
+    gbfs:last_reported "1533085246"^^xsd:integer.
+<http://example.com/station/8> gbfs:num_bikes_available "11"^^xsd:integer;
+    gbfs:num_bikes_disabled "0"^^xsd:integer;
+    gbfs:num_docks_available "8"^^xsd:integer;
+    gbfs:num_docks_disabled "0"^^xsd:integer;
+    gbfs:is_installed "1"^^xsd:boolean;
+    gbfs:is_renting "1"^^xsd:boolean;
+    gbfs:is_returning "1"^^xsd:boolean;
+    gbfs:last_reported "1533169661"^^xsd:integer.
+<http://example.com/station/9> gbfs:num_bikes_available "12"^^xsd:integer;
+    gbfs:num_bikes_disabled "1"^^xsd:integer;
+    gbfs:num_docks_available "14"^^xsd:integer;
+    gbfs:num_docks_disabled "0"^^xsd:integer;
+    gbfs:is_installed "1"^^xsd:boolean;
+    gbfs:is_renting "1"^^xsd:boolean;
+    gbfs:is_returning "1"^^xsd:boolean;
+    gbfs:last_reported "1533170215"^^xsd:integer.
+<http://example.com/station/10> gbfs:num_bikes_available "5"^^xsd:integer;
+    gbfs:num_bikes_disabled "1"^^xsd:integer;
+    gbfs:num_docks_available "6"^^xsd:integer;
+    gbfs:num_docks_disabled "0"^^xsd:integer;
+    gbfs:is_installed "1"^^xsd:boolean;
+    gbfs:is_renting "1"^^xsd:boolean;
+    gbfs:is_returning "1"^^xsd:boolean;
+    gbfs:last_reported "1533170836"^^xsd:integer.
+<http://example.com/station/11> gbfs:num_bikes_available "6"^^xsd:integer;
+    gbfs:num_bikes_disabled "0"^^xsd:integer;
+    gbfs:num_docks_available "5"^^xsd:integer;
+    gbfs:num_docks_disabled "0"^^xsd:integer;
+    gbfs:is_installed "1"^^xsd:boolean;
+    gbfs:is_renting "1"^^xsd:boolean;
+    gbfs:is_returning "1"^^xsd:boolean;
+    gbfs:last_reported "1533171080"^^xsd:integer.
+<http://example.com/station/12> gbfs:num_bikes_available "5"^^xsd:integer;
+    gbfs:num_bikes_disabled "0"^^xsd:integer;
+    gbfs:num_docks_available "6"^^xsd:integer;
+    gbfs:num_docks_disabled "0"^^xsd:integer;
+    gbfs:is_installed "1"^^xsd:boolean;
+    gbfs:is_renting "1"^^xsd:boolean;
+    gbfs:is_returning "1"^^xsd:boolean;
+    gbfs:last_reported "1533185255"^^xsd:integer.
+<http://example.com/station/13> gbfs:num_bikes_available "7"^^xsd:integer;
+    gbfs:num_bikes_disabled "0"^^xsd:integer;
+    gbfs:num_docks_available "4"^^xsd:integer;
+    gbfs:num_docks_disabled "0"^^xsd:integer;
+    gbfs:is_installed "1"^^xsd:boolean;
+    gbfs:is_renting "1"^^xsd:boolean;
+    gbfs:is_returning "1"^^xsd:boolean;
+    gbfs:last_reported "1533171445"^^xsd:integer.
+<http://example.com/station/16> gbfs:num_bikes_available "4"^^xsd:integer;
+    gbfs:num_bikes_disabled "0"^^xsd:integer;
+    gbfs:num_docks_available "4"^^xsd:integer;
+    gbfs:num_docks_disabled "0"^^xsd:integer;
+    gbfs:is_installed "1"^^xsd:boolean;
+    gbfs:is_renting "1"^^xsd:boolean;
+    gbfs:is_returning "1"^^xsd:boolean;
+    gbfs:last_reported "1533179679"^^xsd:integer.
+<http://example.com/station/17> gbfs:num_bikes_available "4"^^xsd:integer;
+    gbfs:num_bikes_disabled "0"^^xsd:integer;
+    gbfs:num_docks_available "7"^^xsd:integer;
+    gbfs:num_docks_disabled "0"^^xsd:integer;
+    gbfs:is_installed "1"^^xsd:boolean;
+    gbfs:is_renting "1"^^xsd:boolean;
+    gbfs:is_returning "1"^^xsd:boolean;
+    gbfs:last_reported "1533169853"^^xsd:integer.
+<http://example.com/station/18> gbfs:num_bikes_available "6"^^xsd:integer;
+    gbfs:num_bikes_disabled "0"^^xsd:integer;
+    gbfs:num_docks_available "5"^^xsd:integer;
+    gbfs:num_docks_disabled "0"^^xsd:integer;
+    gbfs:is_installed "1"^^xsd:boolean;
+    gbfs:is_renting "1"^^xsd:boolean;
+    gbfs:is_returning "1"^^xsd:boolean;
+    gbfs:last_reported "1533194647"^^xsd:integer.
+<http://example.com/station/19> gbfs:num_bikes_available "3"^^xsd:integer;
+    gbfs:num_bikes_disabled "1"^^xsd:integer;
+    gbfs:num_docks_available "6"^^xsd:integer;
+    gbfs:num_docks_disabled "0"^^xsd:integer;
+    gbfs:is_installed "1"^^xsd:boolean;
+    gbfs:is_renting "1"^^xsd:boolean;
+    gbfs:is_returning "1"^^xsd:boolean;
+    gbfs:last_reported "1533158567"^^xsd:integer.
+<http://example.com/station/20> gbfs:num_bikes_available "8"^^xsd:integer;
+    gbfs:num_bikes_disabled "0"^^xsd:integer;
+    gbfs:num_docks_available "3"^^xsd:integer;
+    gbfs:num_docks_disabled "0"^^xsd:integer;
+    gbfs:is_installed "1"^^xsd:boolean;
+    gbfs:is_renting "1"^^xsd:boolean;
+    gbfs:is_returning "1"^^xsd:boolean;
+    gbfs:last_reported "1533085213"^^xsd:integer.
+<http://example.com/station/21> gbfs:num_bikes_available "2"^^xsd:integer;
+    gbfs:num_bikes_disabled "1"^^xsd:integer;
+    gbfs:num_docks_available "8"^^xsd:integer;
+    gbfs:num_docks_disabled "0"^^xsd:integer;
+    gbfs:is_installed "1"^^xsd:boolean;
+    gbfs:is_renting "1"^^xsd:boolean;
+    gbfs:is_returning "1"^^xsd:boolean;
+    gbfs:last_reported "1533170851"^^xsd:integer.
+<http://example.com/station/22> gbfs:num_bikes_available "3"^^xsd:integer;
+    gbfs:num_bikes_disabled "0"^^xsd:integer;
+    gbfs:num_docks_available "6"^^xsd:integer;
+    gbfs:num_docks_disabled "0"^^xsd:integer;
+    gbfs:is_installed "1"^^xsd:boolean;
+    gbfs:is_renting "1"^^xsd:boolean;
+    gbfs:is_returning "1"^^xsd:boolean;
+    gbfs:last_reported "1520217229"^^xsd:integer.
+<http://example.com/station/23> gbfs:num_bikes_available "5"^^xsd:integer;
+    gbfs:num_bikes_disabled "0"^^xsd:integer;
+    gbfs:num_docks_available "6"^^xsd:integer;
+    gbfs:num_docks_disabled "0"^^xsd:integer;
+    gbfs:is_installed "1"^^xsd:boolean;
+    gbfs:is_renting "1"^^xsd:boolean;
+    gbfs:is_returning "1"^^xsd:boolean;
+    gbfs:last_reported "1533085231"^^xsd:integer.
+<http://example.com/station/24> gbfs:num_bikes_available "5"^^xsd:integer;
+    gbfs:num_bikes_disabled "0"^^xsd:integer;
+    gbfs:num_docks_available "6"^^xsd:integer;
+    gbfs:num_docks_disabled "0"^^xsd:integer;
+    gbfs:is_installed "1"^^xsd:boolean;
+    gbfs:is_renting "1"^^xsd:boolean;
+    gbfs:is_returning "1"^^xsd:boolean;
+    gbfs:last_reported "1533170248"^^xsd:integer.
+<http://example.com/station/25> gbfs:num_bikes_available "8"^^xsd:integer;
+    gbfs:num_bikes_disabled "0"^^xsd:integer;
+    gbfs:num_docks_available "3"^^xsd:integer;
+    gbfs:num_docks_disabled "0"^^xsd:integer;
+    gbfs:is_installed "1"^^xsd:boolean;
+    gbfs:is_renting "1"^^xsd:boolean;
+    gbfs:is_returning "1"^^xsd:boolean;
+    gbfs:last_reported "1533170535"^^xsd:integer.
+<http://example.com/station/26> gbfs:num_bikes_available "6"^^xsd:integer;
+    gbfs:num_bikes_disabled "0"^^xsd:integer;
+    gbfs:num_docks_available "13"^^xsd:integer;
+    gbfs:num_docks_disabled "0"^^xsd:integer;
+    gbfs:is_installed "1"^^xsd:boolean;
+    gbfs:is_renting "1"^^xsd:boolean;
+    gbfs:is_returning "1"^^xsd:boolean;
+    gbfs:last_reported "1533171168"^^xsd:integer.
+<http://example.com/station/27> gbfs:num_bikes_available "9"^^xsd:integer;
+    gbfs:num_bikes_disabled "0"^^xsd:integer;
+    gbfs:num_docks_available "2"^^xsd:integer;
+    gbfs:num_docks_disabled "0"^^xsd:integer;
+    gbfs:is_installed "1"^^xsd:boolean;
+    gbfs:is_renting "1"^^xsd:boolean;
+    gbfs:is_returning "1"^^xsd:boolean;
+    gbfs:last_reported "1533170114"^^xsd:integer.
+<http://example.com/station/28> gbfs:num_bikes_available "4"^^xsd:integer;
+    gbfs:num_bikes_disabled "0"^^xsd:integer;
+    gbfs:num_docks_available "11"^^xsd:integer;
+    gbfs:num_docks_disabled "0"^^xsd:integer;
+    gbfs:is_installed "1"^^xsd:boolean;
+    gbfs:is_renting "1"^^xsd:boolean;
+    gbfs:is_returning "1"^^xsd:boolean;
+    gbfs:last_reported "1533169498"^^xsd:integer.
+<http://example.com/station/29> gbfs:num_bikes_available "5"^^xsd:integer;
+    gbfs:num_bikes_disabled "1"^^xsd:integer;
+    gbfs:num_docks_available "9"^^xsd:integer;
+    gbfs:num_docks_disabled "0"^^xsd:integer;
+    gbfs:is_installed "1"^^xsd:boolean;
+    gbfs:is_renting "1"^^xsd:boolean;
+    gbfs:is_returning "1"^^xsd:boolean;
+    gbfs:last_reported "1532093530"^^xsd:integer.
+<http://example.com/station/30> gbfs:num_bikes_available "4"^^xsd:integer;
+    gbfs:num_bikes_disabled "1"^^xsd:integer;
+    gbfs:num_docks_available "10"^^xsd:integer;
+    gbfs:num_docks_disabled "0"^^xsd:integer;
+    gbfs:is_installed "1"^^xsd:boolean;
+    gbfs:is_renting "1"^^xsd:boolean;
+    gbfs:is_returning "1"^^xsd:boolean;
+    gbfs:last_reported "1533142647"^^xsd:integer.
+<http://example.com/station/31> gbfs:num_bikes_available "5"^^xsd:integer;
+    gbfs:num_bikes_disabled "0"^^xsd:integer;
+    gbfs:num_docks_available "6"^^xsd:integer;
+    gbfs:num_docks_disabled "0"^^xsd:integer;
+    gbfs:is_installed "1"^^xsd:boolean;
+    gbfs:is_renting "1"^^xsd:boolean;
+    gbfs:is_returning "1"^^xsd:boolean;
+    gbfs:last_reported "1533171712"^^xsd:integer.
+<http://example.com/station/32> gbfs:num_bikes_available "11"^^xsd:integer;
+    gbfs:num_bikes_disabled "0"^^xsd:integer;
+    gbfs:num_docks_available "0"^^xsd:integer;
+    gbfs:num_docks_disabled "0"^^xsd:integer;
+    gbfs:is_installed "1"^^xsd:boolean;
+    gbfs:is_renting "1"^^xsd:boolean;
+    gbfs:is_returning "1"^^xsd:boolean;
+    gbfs:last_reported "1533171119"^^xsd:integer.
+<http://example.com/station/33> gbfs:num_bikes_available "5"^^xsd:integer;
+    gbfs:num_bikes_disabled "0"^^xsd:integer;
+    gbfs:num_docks_available "6"^^xsd:integer;
+    gbfs:num_docks_disabled "0"^^xsd:integer;
+    gbfs:is_installed "1"^^xsd:boolean;
+    gbfs:is_renting "1"^^xsd:boolean;
+    gbfs:is_returning "1"^^xsd:boolean;
+    gbfs:last_reported "1533189899"^^xsd:integer.
+<http://example.com/station/34> gbfs:num_bikes_available "4"^^xsd:integer;
+    gbfs:num_bikes_disabled "2"^^xsd:integer;
+    gbfs:num_docks_available "5"^^xsd:integer;
+    gbfs:num_docks_disabled "0"^^xsd:integer;
+    gbfs:is_installed "1"^^xsd:boolean;
+    gbfs:is_renting "1"^^xsd:boolean;
+    gbfs:is_returning "1"^^xsd:boolean;
+    gbfs:last_reported "1533171397"^^xsd:integer.
+<http://example.com/station/35> gbfs:num_bikes_available "3"^^xsd:integer;
+    gbfs:num_bikes_disabled "2"^^xsd:integer;
+    gbfs:num_docks_available "6"^^xsd:integer;
+    gbfs:num_docks_disabled "0"^^xsd:integer;
+    gbfs:is_installed "1"^^xsd:boolean;
+    gbfs:is_renting "1"^^xsd:boolean;
+    gbfs:is_returning "1"^^xsd:boolean;
+    gbfs:last_reported "1533169297"^^xsd:integer.
+<http://example.com/station/36> gbfs:num_bikes_available "5"^^xsd:integer;
+    gbfs:num_bikes_disabled "0"^^xsd:integer;
+    gbfs:num_docks_available "10"^^xsd:integer;
+    gbfs:num_docks_disabled "0"^^xsd:integer;
+    gbfs:is_installed "1"^^xsd:boolean;
+    gbfs:is_renting "1"^^xsd:boolean;
+    gbfs:is_returning "1"^^xsd:boolean;
+    gbfs:last_reported "1533126681"^^xsd:integer.
+<http://example.com/station/37> gbfs:num_bikes_available "1"^^xsd:integer;
+    gbfs:num_bikes_disabled "0"^^xsd:integer;
+    gbfs:num_docks_available "10"^^xsd:integer;
+    gbfs:num_docks_disabled "0"^^xsd:integer;
+    gbfs:is_installed "1"^^xsd:boolean;
+    gbfs:is_renting "1"^^xsd:boolean;
+    gbfs:is_returning "1"^^xsd:boolean;
+    gbfs:last_reported "1533185421"^^xsd:integer.
+<http://example.com/station/38> gbfs:num_bikes_available "5"^^xsd:integer;
+    gbfs:num_bikes_disabled "1"^^xsd:integer;
+    gbfs:num_docks_available "9"^^xsd:integer;
+    gbfs:num_docks_disabled "0"^^xsd:integer;
+    gbfs:is_installed "1"^^xsd:boolean;
+    gbfs:is_renting "1"^^xsd:boolean;
+    gbfs:is_returning "1"^^xsd:boolean;
+    gbfs:last_reported "1533186646"^^xsd:integer.
+<http://example.com/station/39> gbfs:num_bikes_available "7"^^xsd:integer;
+    gbfs:num_bikes_disabled "0"^^xsd:integer;
+    gbfs:num_docks_available "4"^^xsd:integer;
+    gbfs:num_docks_disabled "0"^^xsd:integer;
+    gbfs:is_installed "1"^^xsd:boolean;
+    gbfs:is_renting "1"^^xsd:boolean;
+    gbfs:is_returning "1"^^xsd:boolean;
+    gbfs:last_reported "1533184939"^^xsd:integer.
+<http://example.com/station/40> gbfs:num_bikes_available "5"^^xsd:integer;
+    gbfs:num_bikes_disabled "1"^^xsd:integer;
+    gbfs:num_docks_available "5"^^xsd:integer;
+    gbfs:num_docks_disabled "0"^^xsd:integer;
+    gbfs:is_installed "1"^^xsd:boolean;
+    gbfs:is_renting "1"^^xsd:boolean;
+    gbfs:is_returning "1"^^xsd:boolean;
+    gbfs:last_reported "1533085490"^^xsd:integer.
+<http://example.com/station/41> gbfs:num_bikes_available "5"^^xsd:integer;
+    gbfs:num_bikes_disabled "0"^^xsd:integer;
+    gbfs:num_docks_available "6"^^xsd:integer;
+    gbfs:num_docks_disabled "0"^^xsd:integer;
+    gbfs:is_installed "1"^^xsd:boolean;
+    gbfs:is_renting "1"^^xsd:boolean;
+    gbfs:is_returning "1"^^xsd:boolean;
+    gbfs:last_reported "1533085484"^^xsd:integer.
+<http://example.com/station/42> gbfs:num_bikes_available "5"^^xsd:integer;
+    gbfs:num_bikes_disabled "0"^^xsd:integer;
+    gbfs:num_docks_available "6"^^xsd:integer;
+    gbfs:num_docks_disabled "0"^^xsd:integer;
+    gbfs:is_installed "1"^^xsd:boolean;
+    gbfs:is_renting "1"^^xsd:boolean;
+    gbfs:is_returning "1"^^xsd:boolean;
+    gbfs:last_reported "1533098270"^^xsd:integer.
+<http://example.com/station/43> gbfs:num_bikes_available "5"^^xsd:integer;
+    gbfs:num_bikes_disabled "0"^^xsd:integer;
+    gbfs:num_docks_available "6"^^xsd:integer;
+    gbfs:num_docks_disabled "0"^^xsd:integer;
+    gbfs:is_installed "1"^^xsd:boolean;
+    gbfs:is_renting "1"^^xsd:boolean;
+    gbfs:is_returning "1"^^xsd:boolean;
+    gbfs:last_reported "1533085459"^^xsd:integer.
+<http://example.com/station/44> gbfs:num_bikes_available "5"^^xsd:integer;
+    gbfs:num_bikes_disabled "0"^^xsd:integer;
+    gbfs:num_docks_available "6"^^xsd:integer;
+    gbfs:num_docks_disabled "0"^^xsd:integer;
+    gbfs:is_installed "1"^^xsd:boolean;
+    gbfs:is_renting "1"^^xsd:boolean;
+    gbfs:is_returning "1"^^xsd:boolean;
+    gbfs:last_reported "1533085551"^^xsd:integer.
+<http://example.com/station/45> gbfs:num_bikes_available "3"^^xsd:integer;
+    gbfs:num_bikes_disabled "0"^^xsd:integer;
+    gbfs:num_docks_available "8"^^xsd:integer;
+    gbfs:num_docks_disabled "0"^^xsd:integer;
+    gbfs:is_installed "1"^^xsd:boolean;
+    gbfs:is_renting "1"^^xsd:boolean;
+    gbfs:is_returning "1"^^xsd:boolean;
+    gbfs:last_reported "1532739158"^^xsd:integer.
+<http://example.com/station/46> gbfs:num_bikes_available "5"^^xsd:integer;
+    gbfs:num_bikes_disabled "0"^^xsd:integer;
+    gbfs:num_docks_available "6"^^xsd:integer;
+    gbfs:num_docks_disabled "0"^^xsd:integer;
+    gbfs:is_installed "1"^^xsd:boolean;
+    gbfs:is_renting "1"^^xsd:boolean;
+    gbfs:is_returning "1"^^xsd:boolean;
+    gbfs:last_reported "1533085338"^^xsd:integer.
+<http://example.com/station/47> gbfs:num_bikes_available "0"^^xsd:integer;
+    gbfs:num_bikes_disabled "0"^^xsd:integer;
+    gbfs:num_docks_available "11"^^xsd:integer;
+    gbfs:num_docks_disabled "0"^^xsd:integer;
+    gbfs:is_installed "1"^^xsd:boolean;
+    gbfs:is_renting "1"^^xsd:boolean;
+    gbfs:is_returning "1"^^xsd:boolean;
+    gbfs:last_reported "1533171551"^^xsd:integer.
+<http://example.com/station/48> gbfs:num_bikes_available "5"^^xsd:integer;
+    gbfs:num_bikes_disabled "0"^^xsd:integer;
+    gbfs:num_docks_available "6"^^xsd:integer;
+    gbfs:num_docks_disabled "0"^^xsd:integer;
+    gbfs:is_installed "1"^^xsd:boolean;
+    gbfs:is_renting "1"^^xsd:boolean;
+    gbfs:is_returning "1"^^xsd:boolean;
+    gbfs:last_reported "1533085469"^^xsd:integer.
+<http://example.com/station/50> gbfs:num_bikes_available "4"^^xsd:integer;
+    gbfs:num_bikes_disabled "0"^^xsd:integer;
+    gbfs:num_docks_available "7"^^xsd:integer;
+    gbfs:num_docks_disabled "0"^^xsd:integer;
+    gbfs:is_installed "1"^^xsd:boolean;
+    gbfs:is_renting "1"^^xsd:boolean;
+    gbfs:is_returning "1"^^xsd:boolean;
+    gbfs:last_reported "1533171672"^^xsd:integer.
+<http://example.com/station/51> gbfs:num_bikes_available "4"^^xsd:integer;
+    gbfs:num_bikes_disabled "0"^^xsd:integer;
+    gbfs:num_docks_available "7"^^xsd:integer;
+    gbfs:num_docks_disabled "0"^^xsd:integer;
+    gbfs:is_installed "1"^^xsd:boolean;
+    gbfs:is_renting "1"^^xsd:boolean;
+    gbfs:is_returning "1"^^xsd:boolean;
+    gbfs:last_reported "1532908975"^^xsd:integer.
+<http://example.com/station/53> gbfs:num_bikes_available "4"^^xsd:integer;
+    gbfs:num_bikes_disabled "3"^^xsd:integer;
+    gbfs:num_docks_available "26"^^xsd:integer;
+    gbfs:num_docks_disabled "2"^^xsd:integer;
+    gbfs:is_installed "1"^^xsd:boolean;
+    gbfs:is_renting "1"^^xsd:boolean;
+    gbfs:is_returning "1"^^xsd:boolean;
+    gbfs:last_reported "1533194414"^^xsd:integer.
+<http://example.com/station/54> gbfs:num_bikes_available "18"^^xsd:integer;
+    gbfs:num_bikes_disabled "1"^^xsd:integer;
+    gbfs:num_docks_available "0"^^xsd:integer;
+    gbfs:num_docks_disabled "0"^^xsd:integer;
+    gbfs:is_installed "1"^^xsd:boolean;
+    gbfs:is_renting "1"^^xsd:boolean;
+    gbfs:is_returning "1"^^xsd:boolean;
+    gbfs:last_reported "1533148252"^^xsd:integer.
+<http://example.com/station/55> gbfs:num_bikes_available "9"^^xsd:integer;
+    gbfs:num_bikes_disabled "1"^^xsd:integer;
+    gbfs:num_docks_available "5"^^xsd:integer;
+    gbfs:num_docks_disabled "0"^^xsd:integer;
+    gbfs:is_installed "1"^^xsd:boolean;
+    gbfs:is_renting "1"^^xsd:boolean;
+    gbfs:is_returning "1"^^xsd:boolean;
+    gbfs:last_reported "1533157098"^^xsd:integer.
+<http://example.com/station/56> gbfs:num_bikes_available "4"^^xsd:integer;
+    gbfs:num_bikes_disabled "0"^^xsd:integer;
+    gbfs:num_docks_available "11"^^xsd:integer;
+    gbfs:num_docks_disabled "0"^^xsd:integer;
+    gbfs:is_installed "1"^^xsd:boolean;
+    gbfs:is_renting "1"^^xsd:boolean;
+    gbfs:is_returning "1"^^xsd:boolean;
+    gbfs:last_reported "1533189482"^^xsd:integer.
+ex:system gbfs:station <http://example.com/station/3>, <http://example.com/station/4>, <http://example.com/station/5>, <http://example.com/station/6>, <http://example.com/station/7>, <http://example.com/station/8>, <http://example.com/station/9>, <http://example.com/station/10>, <http://example.com/station/11>, <http://example.com/station/12>, <http://example.com/station/13>, <http://example.com/station/16>, <http://example.com/station/17>, <http://example.com/station/18>, <http://example.com/station/19>, <http://example.com/station/20>, <http://example.com/station/21>, <http://example.com/station/22>, <http://example.com/station/23>, <http://example.com/station/24>, <http://example.com/station/25>, <http://example.com/station/26>, <http://example.com/station/27>, <http://example.com/station/28>, <http://example.com/station/29>, <http://example.com/station/30>, <http://example.com/station/31>, <http://example.com/station/32>, <http://example.com/station/33>, <http://example.com/station/34>, <http://example.com/station/35>, <http://example.com/station/36>, <http://example.com/station/37>, <http://example.com/station/38>, <http://example.com/station/39>, <http://example.com/station/40>, <http://example.com/station/41>, <http://example.com/station/42>, <http://example.com/station/43>, <http://example.com/station/44>, <http://example.com/station/45>, <http://example.com/station/46>, <http://example.com/station/47>, <http://example.com/station/48>, <http://example.com/station/50>, <http://example.com/station/51>, <http://example.com/station/53>, <http://example.com/station/54>, <http://example.com/station/55>, <http://example.com/station/56>.
+<http://example.com/station/3> a gbfs:Station;
+    gbfs:station_id "3";
+    gbfs:name "Yas Marina";
+    gbfs:short_name "Yas Marina";
+    geo:lat "24.465793"^^xsd:double;
+    geo:long "54.60961"^^xsd:double;
+    gbfs:region <http://example.com/regions/6>;
+    gbfs:rental_method gbfs:KEY, gbfs:CREDITCARD;
+    gbfs:capacity "15"^^xsd:integer.
+<http://example.com/station/4> a gbfs:Station;
+    gbfs:station_id "4";
+    gbfs:name "Yas Beach Station";
+    gbfs:short_name "Yas Beach Station";
+    geo:lat "24.461865"^^xsd:double;
+    geo:long "54.59336909999999"^^xsd:double;
+    gbfs:region <http://example.com/regions/6>;
+    gbfs:rental_method gbfs:KEY, gbfs:CREDITCARD;
+    gbfs:capacity "9"^^xsd:integer.
+<http://example.com/station/5> a gbfs:Station;
+    gbfs:station_id "5";
+    gbfs:name "Yas Waterworld";
+    gbfs:short_name "Yas Waterworld";
+    geo:lat "24.489678"^^xsd:double;
+    geo:long "54.60011209999999"^^xsd:double;
+    gbfs:region <http://example.com/regions/6>;
+    gbfs:rental_method gbfs:KEY, gbfs:CREDITCARD;
+    gbfs:capacity "11"^^xsd:integer.
+<http://example.com/station/6> a gbfs:Station;
+    gbfs:station_id "6";
+    gbfs:name "Yas Links";
+    gbfs:short_name "Yas Links";
+    geo:lat "24.478217"^^xsd:double;
+    geo:long "54.6002551"^^xsd:double;
+    gbfs:region <http://example.com/regions/6>;
+    gbfs:rental_method gbfs:KEY, gbfs:CREDITCARD;
+    gbfs:capacity "11"^^xsd:integer.
+<http://example.com/station/7> a gbfs:Station;
+    gbfs:station_id "7";
+    gbfs:name "Al Zeina";
+    gbfs:short_name "Al Zeina";
+    geo:lat "24.456953"^^xsd:double;
+    geo:long "54.615754100000004"^^xsd:double;
+    gbfs:region <http://example.com/regions/5>;
+    gbfs:rental_method gbfs:KEY, gbfs:CREDITCARD;
+    gbfs:capacity "13"^^xsd:integer.
+<http://example.com/station/8> a gbfs:Station;
+    gbfs:station_id "8";
+    gbfs:name "Ferrari World";
+    gbfs:short_name "Ferrari World";
+    geo:lat "24.485254"^^xsd:double;
+    geo:long "54.60806099999999"^^xsd:double;
+    gbfs:region <http://example.com/regions/6>;
+    gbfs:rental_method gbfs:KEY, gbfs:CREDITCARD;
+    gbfs:capacity "19"^^xsd:integer.
+<http://example.com/station/9> a gbfs:Station;
+    gbfs:station_id "9";
+    gbfs:name "Yas Plaza";
+    gbfs:short_name "Yas Plaza";
+    geo:lat "24.465954"^^xsd:double;
+    geo:long "54.598305100000005"^^xsd:double;
+    gbfs:region <http://example.com/regions/6>;
+    gbfs:rental_method gbfs:KEY, gbfs:CREDITCARD;
+    gbfs:capacity "27"^^xsd:integer.
+<http://example.com/station/10> a gbfs:Station;
+    gbfs:station_id "10";
+    gbfs:name "Al Bandar";
+    gbfs:short_name "Al Bandar";
+    geo:lat "24.449757"^^xsd:double;
+    geo:long "54.60056610000001"^^xsd:double;
+    gbfs:region <http://example.com/regions/5>;
+    gbfs:rental_method gbfs:KEY, gbfs:CREDITCARD;
+    gbfs:capacity "12"^^xsd:integer.
+<http://example.com/station/11> a gbfs:Station;
+    gbfs:station_id "11";
+    gbfs:name "Al Muneera South";
+    gbfs:short_name "Al Muneera South";
+    geo:lat "24.450142"^^xsd:double;
+    geo:long "54.6052761"^^xsd:double;
+    gbfs:region <http://example.com/regions/5>;
+    gbfs:rental_method gbfs:KEY, gbfs:CREDITCARD;
+    gbfs:capacity "11"^^xsd:integer.
+<http://example.com/station/12> a gbfs:Station;
+    gbfs:station_id "12";
+    gbfs:name "Al Muneera North";
+    gbfs:short_name "Al Muneera North";
+    geo:lat "24.452079"^^xsd:double;
+    geo:long "54.60465099999999"^^xsd:double;
+    gbfs:region <http://example.com/regions/5>;
+    gbfs:rental_method gbfs:KEY, gbfs:CREDITCARD;
+    gbfs:capacity "11"^^xsd:integer.
+<http://example.com/station/13> a gbfs:Station;
+    gbfs:station_id "13";
+    gbfs:name "Yas Viceroy";
+    gbfs:short_name "Yas Viceroy";
+    geo:lat "24.467541523262938"^^xsd:double;
+    geo:long "54.60465708378251"^^xsd:double;
+    gbfs:region <http://example.com/regions/6>;
+    gbfs:rental_method gbfs:KEY, gbfs:CREDITCARD;
+    gbfs:capacity "11"^^xsd:integer.
+<http://example.com/station/16> a gbfs:Station;
+    gbfs:station_id "16";
+    gbfs:name "Masdar City";
+    gbfs:short_name "Masdar City";
+    geo:lat "24.441122"^^xsd:double;
+    geo:long "54.619692999999984"^^xsd:double;
+    gbfs:region <http://example.com/regions/8>;
+    gbfs:rental_method gbfs:KEY, gbfs:CREDITCARD;
+    gbfs:capacity "8"^^xsd:integer.
+<http://example.com/station/17> a gbfs:Station;
+    gbfs:station_id "17";
+    gbfs:name "Golf Gardens";
+    gbfs:short_name "Golf Gardens";
+    geo:lat "24.42067"^^xsd:double;
+    geo:long "54.53155799999999"^^xsd:double;
+    gbfs:region <http://example.com/regions/5>;
+    gbfs:rental_method gbfs:KEY, gbfs:CREDITCARD;
+    gbfs:capacity "11"^^xsd:integer.
+<http://example.com/station/18> a gbfs:Station;
+    gbfs:station_id "18";
+    gbfs:name "Gardens Plaza";
+    gbfs:short_name "Gardens Plaza";
+    geo:lat "24.432552"^^xsd:double;
+    geo:long "54.566438000000005"^^xsd:double;
+    gbfs:region <http://example.com/regions/5>;
+    gbfs:rental_method gbfs:KEY, gbfs:CREDITCARD;
+    gbfs:capacity "11"^^xsd:integer.
+<http://example.com/station/19> a gbfs:Station;
+    gbfs:station_id "19";
+    gbfs:name "Louvre Boulevard";
+    gbfs:short_name "Louvre Boulevard";
+    geo:lat "24.530481"^^xsd:double;
+    geo:long "54.403925000000015"^^xsd:double;
+    gbfs:region <http://example.com/regions/9>;
+    gbfs:rental_method gbfs:KEY, gbfs:CREDITCARD;
+    gbfs:capacity "10"^^xsd:integer.
+<http://example.com/station/20> a gbfs:Station;
+    gbfs:station_id "20";
+    gbfs:name "ARG Gate 13";
+    gbfs:short_name "ARG Gate 13";
+    geo:lat "24.440487"^^xsd:double;
+    geo:long "54.598675000000014"^^xsd:double;
+    gbfs:region <http://example.com/regions/5>;
+    gbfs:rental_method gbfs:KEY, gbfs:CREDITCARD;
+    gbfs:capacity "11"^^xsd:integer.
+<http://example.com/station/21> a gbfs:Station;
+    gbfs:station_id "21";
+    gbfs:name "ARG Gate 18";
+    gbfs:short_name "ARG Gate 18";
+    geo:lat "24.43432"^^xsd:double;
+    geo:long "54.579065000000014"^^xsd:double;
+    gbfs:region <http://example.com/regions/5>;
+    gbfs:rental_method gbfs:KEY, gbfs:CREDITCARD;
+    gbfs:capacity "11"^^xsd:integer.
+<http://example.com/station/22> a gbfs:Station;
+    gbfs:station_id "22";
+    gbfs:name "Irena HQ";
+    gbfs:short_name "Irena HQ";
+    geo:lat "24.426488"^^xsd:double;
+    geo:long "54.61844400000001"^^xsd:double;
+    gbfs:region <http://example.com/regions/8>;
+    gbfs:rental_method gbfs:KEY, gbfs:CREDITCARD;
+    gbfs:capacity "9"^^xsd:integer.
+<http://example.com/station/23> a gbfs:Station;
+    gbfs:station_id "23";
+    gbfs:name "Tower 1-3";
+    gbfs:short_name "Tower 1-3";
+    geo:lat "24.49232"^^xsd:double;
+    geo:long "54.39324500000001"^^xsd:double;
+    gbfs:region <http://example.com/regions/3>;
+    gbfs:rental_method gbfs:KEY, gbfs:CREDITCARD;
+    gbfs:capacity "11"^^xsd:integer.
+<http://example.com/station/24> a gbfs:Station;
+    gbfs:station_id "24";
+    gbfs:name "City of Lights";
+    gbfs:short_name "City of Lights";
+    geo:lat "24.499195"^^xsd:double;
+    geo:long "54.403549999999996"^^xsd:double;
+    gbfs:region <http://example.com/regions/3>;
+    gbfs:rental_method gbfs:KEY, gbfs:CREDITCARD;
+    gbfs:capacity "11"^^xsd:integer.
+<http://example.com/station/25> a gbfs:Station;
+    gbfs:station_id "25";
+    gbfs:name "Gate Tower";
+    gbfs:short_name "Gate Tower";
+    geo:lat "24.493276"^^xsd:double;
+    geo:long "54.40830700000001"^^xsd:double;
+    gbfs:region <http://example.com/regions/3>;
+    gbfs:rental_method gbfs:KEY, gbfs:CREDITCARD;
+    gbfs:capacity "11"^^xsd:integer.
+<http://example.com/station/26> a gbfs:Station;
+    gbfs:station_id "26";
+    gbfs:name "Paragon Bay Mall";
+    gbfs:short_name "Paragon Bay Mall";
+    geo:lat "24.490807"^^xsd:double;
+    geo:long "54.394041000000016"^^xsd:double;
+    gbfs:region <http://example.com/regions/3>;
+    gbfs:rental_method gbfs:KEY, gbfs:CREDITCARD;
+    gbfs:capacity "19"^^xsd:integer.
+<http://example.com/station/27> a gbfs:Station;
+    gbfs:station_id "27";
+    gbfs:name "Arc Tower";
+    gbfs:short_name "Arc Tower";
+    geo:lat "24.495467"^^xsd:double;
+    geo:long "54.409504"^^xsd:double;
+    gbfs:region <http://example.com/regions/3>;
+    gbfs:rental_method gbfs:KEY, gbfs:CREDITCARD;
+    gbfs:capacity "11"^^xsd:integer.
+<http://example.com/station/28> a gbfs:Station;
+    gbfs:station_id "28";
+    gbfs:name "Sky Tower";
+    gbfs:short_name "Sky Tower";
+    geo:lat "24.496565"^^xsd:double;
+    geo:long "54.408766000000014"^^xsd:double;
+    gbfs:region <http://example.com/regions/3>;
+    gbfs:rental_method gbfs:KEY, gbfs:CREDITCARD;
+    gbfs:capacity "15"^^xsd:integer.
+<http://example.com/station/29> a gbfs:Station;
+    gbfs:station_id "29";
+    gbfs:name "ADIA HQ 2";
+    gbfs:short_name "ADIA HQ 2";
+    geo:lat "24.486457"^^xsd:double;
+    geo:long "54.352081999999996"^^xsd:double;
+    gbfs:region <http://example.com/regions/7>;
+    gbfs:rental_method gbfs:KEY, gbfs:CREDITCARD;
+    gbfs:capacity "15"^^xsd:integer.
+<http://example.com/station/30> a gbfs:Station;
+    gbfs:station_id "30";
+    gbfs:name "ADIA HQ";
+    gbfs:short_name "ADIA HQ";
+    geo:lat "24.486103"^^xsd:double;
+    geo:long "54.350087"^^xsd:double;
+    gbfs:region <http://example.com/regions/7>;
+    gbfs:rental_method gbfs:KEY, gbfs:CREDITCARD;
+    gbfs:capacity "15"^^xsd:integer.
+<http://example.com/station/31> a gbfs:Station;
+    gbfs:station_id "31";
+    gbfs:name "Al Amanah Khalidiya";
+    gbfs:short_name "Al Amanah Khalidiya";
+    geo:lat "24.471668"^^xsd:double;
+    geo:long "54.346034"^^xsd:double;
+    gbfs:region <http://example.com/regions/7>;
+    gbfs:rental_method gbfs:KEY, gbfs:CREDITCARD;
+    gbfs:capacity "11"^^xsd:integer.
+<http://example.com/station/32> a gbfs:Station;
+    gbfs:station_id "32";
+    gbfs:name "Rayhaan Rotana";
+    gbfs:short_name "Rayhaan Rotana";
+    geo:lat "24.456118"^^xsd:double;
+    geo:long "54.318692"^^xsd:double;
+    gbfs:region <http://example.com/regions/7>;
+    gbfs:rental_method gbfs:KEY, gbfs:CREDITCARD;
+    gbfs:capacity "11"^^xsd:integer.
+<http://example.com/station/33> a gbfs:Station;
+    gbfs:station_id "33";
+    gbfs:name "WTC";
+    gbfs:short_name "WTC";
+    geo:lat "24.48652"^^xsd:double;
+    geo:long "54.35793799999999"^^xsd:double;
+    gbfs:region <http://example.com/regions/7>;
+    gbfs:rental_method gbfs:KEY, gbfs:CREDITCARD;
+    gbfs:capacity "11"^^xsd:integer.
+<http://example.com/station/34> a gbfs:Station;
+    gbfs:station_id "34";
+    gbfs:name "Al Aryam Tower";
+    gbfs:short_name "Al Aryam Tower";
+    geo:lat "24.507333"^^xsd:double;
+    geo:long "54.376300000000015"^^xsd:double;
+    gbfs:region <http://example.com/regions/7>;
+    gbfs:rental_method gbfs:KEY, gbfs:CREDITCARD;
+    gbfs:capacity "11"^^xsd:integer.
+<http://example.com/station/35> a gbfs:Station;
+    gbfs:station_id "35";
+    gbfs:name "Saadiyat Beach";
+    gbfs:short_name "Saadiyat Beach";
+    geo:lat "24.54696"^^xsd:double;
+    geo:long "54.435824"^^xsd:double;
+    gbfs:region <http://example.com/regions/9>;
+    gbfs:rental_method gbfs:KEY, gbfs:CREDITCARD;
+    gbfs:capacity "11"^^xsd:integer.
+<http://example.com/station/36> a gbfs:Station;
+    gbfs:station_id "36";
+    gbfs:name "Marasy";
+    gbfs:short_name "Marasy";
+    geo:lat "24.451202"^^xsd:double;
+    geo:long "54.334509999999995"^^xsd:double;
+    gbfs:region <http://example.com/regions/7>;
+    gbfs:rental_method gbfs:KEY, gbfs:CREDITCARD;
+    gbfs:capacity "15"^^xsd:integer.
+<http://example.com/station/37> a gbfs:Station;
+    gbfs:station_id "37";
+    gbfs:name "Nation Towers";
+    gbfs:short_name "Nation Towers";
+    geo:lat "24.465272"^^xsd:double;
+    geo:long "54.328835"^^xsd:double;
+    gbfs:region <http://example.com/regions/7>;
+    gbfs:rental_method gbfs:KEY, gbfs:CREDITCARD;
+    gbfs:capacity "11"^^xsd:integer.
+<http://example.com/station/38> a gbfs:Station;
+    gbfs:station_id "38";
+    gbfs:name "Nation Riviera";
+    gbfs:short_name "Nation Riviera";
+    geo:lat "24.46568"^^xsd:double;
+    geo:long "54.32818900000001"^^xsd:double;
+    gbfs:region <http://example.com/regions/7>;
+    gbfs:rental_method gbfs:KEY, gbfs:CREDITCARD;
+    gbfs:capacity "15"^^xsd:integer.
+<http://example.com/station/39> a gbfs:Station;
+    gbfs:station_id "39";
+    gbfs:name "Capital Plaza";
+    gbfs:short_name "Capital Plaza";
+    geo:lat "24.498709"^^xsd:double;
+    geo:long "54.368071999999984"^^xsd:double;
+    gbfs:region <http://example.com/regions/7>;
+    gbfs:rental_method gbfs:KEY, gbfs:CREDITCARD;
+    gbfs:capacity "11"^^xsd:integer.
+<http://example.com/station/40> a gbfs:Station;
+    gbfs:station_id "40";
+    gbfs:name "Louvre";
+    gbfs:short_name "Louvre";
+    geo:lat "24.532724"^^xsd:double;
+    geo:long "54.40223499999999"^^xsd:double;
+    gbfs:region <http://example.com/regions/9>;
+    gbfs:rental_method gbfs:KEY, gbfs:CREDITCARD;
+    gbfs:capacity "11"^^xsd:integer.
+<http://example.com/station/41> a gbfs:Station;
+    gbfs:station_id "41";
+    gbfs:name "Saadiyat Beach Golf Club";
+    gbfs:short_name "Saadiyat Beach Golf Club";
+    geo:lat "24.543122"^^xsd:double;
+    geo:long "54.43949700000002"^^xsd:double;
+    gbfs:region <http://example.com/regions/9>;
+    gbfs:rental_method gbfs:KEY, gbfs:CREDITCARD;
+    gbfs:capacity "11"^^xsd:integer.
+<http://example.com/station/42> a gbfs:Station;
+    gbfs:station_id "42";
+    gbfs:name "Saadiyat Beach Residences";
+    gbfs:short_name "Saadiyat Beach Residences";
+    geo:lat "24.552982"^^xsd:double;
+    geo:long "54.450552000000016"^^xsd:double;
+    gbfs:region <http://example.com/regions/9>;
+    gbfs:rental_method gbfs:KEY, gbfs:CREDITCARD;
+    gbfs:capacity "11"^^xsd:integer.
+<http://example.com/station/43> a gbfs:Station;
+    gbfs:station_id "43";
+    gbfs:name "InterContinental Hotel";
+    gbfs:short_name "InterContinental Hotel";
+    geo:lat "24.457339"^^xsd:double;
+    geo:long "54.32734099999999"^^xsd:double;
+    gbfs:region <http://example.com/regions/7>;
+    gbfs:rental_method gbfs:KEY, gbfs:CREDITCARD;
+    gbfs:capacity "11"^^xsd:integer.
+<http://example.com/station/44> a gbfs:Station;
+    gbfs:station_id "44";
+    gbfs:name "Saadiyat Beach Club";
+    gbfs:short_name "Saadiyat Beach Club";
+    geo:lat "24.557154"^^xsd:double;
+    geo:long "54.450361999999984"^^xsd:double;
+    gbfs:region <http://example.com/regions/9>;
+    gbfs:rental_method gbfs:KEY, gbfs:CREDITCARD;
+    gbfs:capacity "11"^^xsd:integer.
+<http://example.com/station/45> a gbfs:Station;
+    gbfs:station_id "45";
+    gbfs:name "NYU West";
+    gbfs:short_name "NYU West";
+    geo:lat "24.525562"^^xsd:double;
+    geo:long "54.432075999999995"^^xsd:double;
+    gbfs:region <http://example.com/regions/9>;
+    gbfs:rental_method gbfs:KEY, gbfs:CREDITCARD;
+    gbfs:capacity "11"^^xsd:integer.
+<http://example.com/station/46> a gbfs:Station;
+    gbfs:station_id "46";
+    gbfs:name "Siemens Building";
+    gbfs:short_name "Siemens Building";
+    geo:lat "24.434351"^^xsd:double;
+    geo:long "54.61689899999999"^^xsd:double;
+    gbfs:region <http://example.com/regions/8>;
+    gbfs:rental_method gbfs:KEY, gbfs:CREDITCARD;
+    gbfs:capacity "11"^^xsd:integer.
+<http://example.com/station/47> a gbfs:Station;
+    gbfs:station_id "47";
+    gbfs:name "Rosewood Hotel";
+    gbfs:short_name "Rosewood Hotel";
+    geo:lat "24.499484"^^xsd:double;
+    geo:long "54.387652"^^xsd:double;
+    gbfs:region <http://example.com/regions/3>;
+    gbfs:rental_method gbfs:KEY, gbfs:CREDITCARD;
+    gbfs:capacity "11"^^xsd:integer.
+<http://example.com/station/48> a gbfs:Station;
+    gbfs:station_id "48";
+    gbfs:name "NYU East";
+    gbfs:short_name "NYU East";
+    geo:lat "24.52174"^^xsd:double;
+    geo:long "54.43561600000001"^^xsd:double;
+    gbfs:region <http://example.com/regions/9>;
+    gbfs:rental_method gbfs:KEY, gbfs:CREDITCARD;
+    gbfs:capacity "11"^^xsd:integer.
+<http://example.com/station/50> a gbfs:Station;
+    gbfs:station_id "50";
+    gbfs:name "SBV 14";
+    gbfs:short_name "SBV 14";
+    geo:lat "24.549218"^^xsd:double;
+    geo:long "54.45022800000001"^^xsd:double;
+    gbfs:region <http://example.com/regions/9>;
+    gbfs:rental_method gbfs:KEY, gbfs:CREDITCARD;
+    gbfs:capacity "11"^^xsd:integer.
+<http://example.com/station/51> a gbfs:Station;
+    gbfs:station_id "51";
+    gbfs:name "St. Regis";
+    gbfs:short_name "St. Regis";
+    geo:lat "24.537567"^^xsd:double;
+    geo:long "54.42835099999999"^^xsd:double;
+    gbfs:region <http://example.com/regions/9>;
+    gbfs:rental_method gbfs:KEY, gbfs:CREDITCARD;
+    gbfs:capacity "11"^^xsd:integer.
+<http://example.com/station/53> a gbfs:Station;
+    gbfs:station_id "53";
+    gbfs:name "Corniche Plaza";
+    gbfs:short_name "Corniche Plaza";
+    geo:lat "24.4736005"^^xsd:double;
+    geo:long "54.3411577"^^xsd:double;
+    gbfs:region <http://example.com/regions/7>;
+    gbfs:rental_method gbfs:KEY, gbfs:CREDITCARD;
+    gbfs:capacity "35"^^xsd:integer.
+<http://example.com/station/54> a gbfs:Station;
+    gbfs:station_id "54";
+    gbfs:name "Corniche East";
+    gbfs:short_name "Corniche East";
+    geo:lat "24.495613"^^xsd:double;
+    geo:long "54.358322999999984"^^xsd:double;
+    gbfs:region <http://example.com/regions/7>;
+    gbfs:rental_method gbfs:KEY, gbfs:CREDITCARD;
+    gbfs:capacity "19"^^xsd:integer.
+<http://example.com/station/55> a gbfs:Station;
+    gbfs:station_id "55";
+    gbfs:name "Hamdan - Salam";
+    gbfs:short_name "Hamdan - Salam";
+    geo:lat "24.496235913154564"^^xsd:double;
+    geo:long "54.37363654375076"^^xsd:double;
+    gbfs:region <http://example.com/regions/7>;
+    gbfs:rental_method gbfs:KEY, gbfs:CREDITCARD;
+    gbfs:capacity "15"^^xsd:integer.
+<http://example.com/station/56> a gbfs:Station;
+    gbfs:station_id "56";
+    gbfs:name "Al Yousuf Center";
+    gbfs:short_name "Al Yousuf Center";
+    geo:lat "24.49209"^^xsd:double;
+    geo:long "54.366101000000015"^^xsd:double;
+    gbfs:region <http://example.com/regions/7>;
+    gbfs:rental_method gbfs:KEY, gbfs:CREDITCARD;
+    gbfs:capacity "15"^^xsd:integer.
+ex:system a gbfs:System;
+    gbfs:system_id "ABU";
+    gbfs:language "ar";
+    gbfs:name "Abu dhabi";
+    gbfs:operator "CYACLE";
+    gbfs:url "http://www.bikeshare.ae";
+    gbfs:start_date "2014-12-20"^^<http://www.w3.org/2001/XMLSchema#>;
+    foaf:phone "800-292253";
+    foaf:mbox "customerservice@cyacle.ae";
+    gbfs:timezone "Asia/Dubai".
