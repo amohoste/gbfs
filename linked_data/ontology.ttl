@@ -310,9 +310,18 @@ gbfs:last_reported a rdf:Property ;
               rdfs:range xsd:integer ;
               rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#station_statusjson> .
 
+gbfs:free_bike a rdf:Property ;
+               status:term_status "unstable"@en ;
+               rdfs:label "Free bike"@en ;
+               rdfs:comment "A bike that is not at a station and is not currently in the middle of an active ride"@en ;
+               rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#free_bike_statusjson> ;
+               rdfs:domain gbfs:RentalHour ;
+               rdfs:range gbfs:UserType .
+
 gbfs:Bike a rdfs:Class ;
             status:term_status "unstable"@en ;
             rdfs:label "bike"@en ;
+            rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#free_bike_statusjson> ;
             rdfs:comment "A bike"@en .
 
 gbfs:bike_id a rdf:Property ;

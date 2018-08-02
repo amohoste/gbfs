@@ -59,6 +59,41 @@ mappings:
       - [foaf:mbox, $(email)]
       - [gbfs:timezone, $(timezone)]
       - [gbfs:license_url, $(license_url)]
+  station_sys:
+    sources: station_info_source
+    s: ex:system
+    po:
+      - [gbfs:station, ex:station/$(station_id)~iri]
+  bike_sys:
+    sources: free_bike_status_source
+    s: ex:system
+    po:
+      - [gbfs:free_bike, ex:bikes/$(bike_id)~iri]
+  hours_sys:
+    sources: system_hours_source
+    s: ex:system
+    po:
+     - [gbfs:rental_hour, ex:system_hours/$(start_time)~iri] # Todo generate id by concatenating, need function?
+  calendar_sys:
+    sources: system_calendar_source
+    s: ex:system
+    po:
+      - [gbfs:calendar, ex:calendars/$(start_day)$(start_month)$(start_year)-$(end_day)$(end_month)$(end_year)~iri]
+  regions_sys: 
+    sources: system_regions_source
+    s: ex:system
+    po:
+      - [gbfs:region, egions/$(region_id)~iri]
+  pricing_plans_sys:
+    sources: system_pricing_plans_source
+    s: ex:system
+    po:
+      - [gbfs:plan, ex:plans/$(plan_id)~iri]
+  alerts_sys:
+    sources: system_alerts_source
+    s: ex:system
+    po:
+      - [gbfs:alert, ex:alerts/$(alert_id)]
   station_info:
     sources: station_info_source
     s: ex:station/$(station_id)
@@ -96,9 +131,9 @@ mappings:
       - [geo:long, $(lon), xsd:double]
       - [gbfs:is_reserved , $(is_reserved), xsd:boolean]
       - [gbfs:is_disabled , $(is_disabled), xsd:boolean]
-  system_hours: # Todo
+  system_hours:
     sources: system_hours_source
-    s: ex:system_hours/tochange # Todo generate id by concatenating, need function?
+    s: ex:system_hours/$(start_time) # Todo generate id by concatenating, need function?
     po:
      - [a, gbfs:RentalHour]
      - [gbfs:user_type, gbfs:$(user_types)~iri]
@@ -107,7 +142,7 @@ mappings:
      - [gbfs:end_time, $(end_time), xsd:time]
   system_calendar: # Todo: linken aan system + hoe id genereren? adhv. concatenatie start en end dates?
     sources: system_calendar_source
-    s: ex:calendars/$(start_date) # Todo generate id by concatenating, need function?
+    s: ex:calendars/$(start_day)$(start_month)$(start_year)-$(end_day)$(end_month)$(end_year)
     po:
       - [a, gbfs:Calendar]
       - [gbfs:start_day, $(start_day)]
