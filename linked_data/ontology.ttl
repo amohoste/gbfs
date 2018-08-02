@@ -32,31 +32,6 @@
                                rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md> ;
                                dct:creator [ foaf:mbox "Amory.Hoste@UGent.be"; foaf:name "Amory Hoste" ] . # WHAT NAMES SHOULD I USE?
 
-gbfs:Feed a rdfs:Class ;
-          status:term_status "unstable"@en ;
-          rdfs:subClassOf dcat:Dataset ;
-          rdfs:label "GBFS Feed"@en ;
-          rdfs:comment "An instance of a gbfs:Feed is a linked GBFS feed that complies to this specification."@en ;
-          rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#files> ;
-          dcat:theme <http://eurovoc.europa.eu/2015> .
-
-gbfs:last_updated a rdf:Property ;
-             status:term_status "unstable"@en ;
-             rdfs:label "Last updated"@en ;
-             rdfs:comment "Integer POSIX timestamp indicating the last time the data in this feed was updated"@en ;
-             rdfs:seeAlso <https://github.com/amohoste/gbfs/blob/master/gbfs.md#system_informationjson> ;
-             rdfs:domain gbfs:Feed ;
-             rdfs:range xsd:integer . 
-
-gbfs:ttl a rdf:Property ;
-             status:term_status "unstable"@en ;
-             rdfs:subPropertyOf dct:Period ;
-             rdfs:label "Time to live"@en ;
-             rdfs:comment "Integer representing the number of seconds before the data in this feed will be updated again"@en ;
-             rdfs:seeAlso <https://github.com/amohoste/gbfs/blob/master/gbfs.md#system_informationjson> ;
-             rdfs:domain gbfs:Feed ;
-             rdfs:range xsd:integer .	
-
 gbfs:System a rdfs:Class ;
             status:term_status "unstable"@en ;
             rdfs:subClassOf foaf:Agent ;

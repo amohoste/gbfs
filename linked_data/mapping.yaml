@@ -3,20 +3,48 @@ prefixes:
   ex: "http://example.com/"
   geo: "http://www.w3.org/2003/01/geo/wgs84_pos#"
 
-# VRAAG: last_updated en ttl, wat doe ik hier dan mee?
-# VRAAG: feed
-# TODO: last_updated and ttl
-# TODO: Moet je wanneer ik bijvoorbeeld een station identificeer op een bepaalde url ook geen data teruggeven wanneer die url wordt opgevraagd?
-# Wat doen met niet bestaande files?
-# TODO: scriptje te schrijven die de url etc invult?
-# Language: parse url
+sources:
+  system_information_source:
+    access: system_information.json
+    referenceFormulation: jsonpath
+    iterator: $.data
+  station_info_source:
+    access: station_information.json
+    referenceFormulation: jsonpath
+    iterator: $.data.stations[*]
+  station_status_source:
+    access: station_status.json
+    referenceFormulation: jsonpath
+    iterator: $.data.stations[*]
+  free_bike_status_source:
+    access: free_bike_status.json
+    referenceFormulation: jsonpath
+    iterator: $.data.bikes[*]
+  system_hours_source:
+    access: system_hours.json
+    referenceFormulation: jsonpath
+    iterator: $.data.rental_hours[*]
+  system_calendar_source:
+    access: system_calendar.json
+    referenceFormulation: jsonpath
+    iterator: $.data.calendars[*]
+  system_regions_source:
+    access: system_regions.json
+    referenceFormulation: jsonpath
+    iterator: $.data.regions[*]
+  system_pricing_plans_source:
+    access: system_pricing_plans.json
+    referenceFormulation: jsonpath
+    iterator: $.data.plans[*]
+  system_alerts_source:
+    access: system_alerts.json
+    referenceFormulation: jsonpath
+    iterator: $.data.alerts[*]
 
 mappings: 
-  # gbfs: TODO + System
-  system_info: # Todo: language
-    sources:
-      - ['system_information.json~jsonpath', '$.data']
-    s: http://example.com/system/$(system_id)
+  system_info:
+    sources: system_information_source
+    s: ex:system
     po:
       - [a, gbfs:System]
       - [gbfs:system_id, $(system_id)]
@@ -31,10 +59,9 @@ mappings:
       - [foaf:mbox, $(email)]
       - [gbfs:timezone, $(timezone)]
       - [gbfs:license_url, $(license_url)]
-  station_info: # Todo: language
-    sources:
-      - ['station_information.json~jsonpath', '$.data.stations[*]']
-    s: http://example.com/station/$(station_id)
+  station_info:
+    sources: station_info_source
+    s: ex:station/$(station_id)
     po:
       - [a, gbfs:Station]
       - [gbfs:station_id, $(station_id)]
@@ -48,10 +75,9 @@ mappings:
       - [vcard:postal-code, $(post_code)]
       - [gbfs:rental_method, gbfs:$(rental_methods)~iri]
       - [gbfs:capacity, $(capacity), xsd:integer]
-  station_status: # TODO: language
-    sources:
-      - ['station_status.json~jsonpath', '$.data.stations[*]']
-    s: http://example.com/station/$(station_id)
+  station_status:
+    sources: station_status_source
+    s: ex:station/$(station_id)
     po:
       - [gbfs:num_bikes_available, $(num_bikes_available), xsd:integer]
       - [gbfs:num_bikes_disabled, $(num_bikes_disabled), xsd:integer]
@@ -61,28 +87,23 @@ mappings:
       - [gbfs:is_renting, $(is_renting), xsd:boolean]
       - [gbfs:is_returning, $(is_returning), xsd:boolean]
       - [gbfs:last_reported, $(last_reported), xsd:integer]
-  #free_bike_status: # TODO: language 
-  # Vraag: moet bike gelinkt worden aan system?, vb. system gbfs:bike <bikes/1>, moet dan manier vinden om identifier van system te vinden, kunnen bv. meerdere systems zijn?
-  # TOOD: kijken of variabelen mogelijk
-  #  sources:
-  #    - ['free_bike_status.json~jsonpath', '$.data.bikes[*]']
-  #  s: http://example.com/bikes/$(bike_id)
-  #  po:
-  #    - [gbfs:bike_id, $(bike_id)]
-  #    - [geo:lat, $(lat), xsd:double]
-  #    - [geo:long, $(lon), xsd:double]
-  #    - [gbfs:is_reserved , $(is_reserved), xsd:boolean]
-  #    - [gbfs:is_disabled , $(is_disabled), xsd:boolean]
+  free_bike_status:
+    sources: free_bike_status_source
+    s: ex:bikes/$(bike_id)
+    po:
+      - [gbfs:bike_id, $(bike_id)]
+      - [geo:lat, $(lat), xsd:double]
+      - [geo:long, $(lon), xsd:double]
+      - [gbfs:is_reserved , $(is_reserved), xsd:boolean]
+      - [gbfs:is_disabled , $(is_disabled), xsd:boolean]
   # system_hours: # Todo
-  #  sources:
-  #    - ['system_hours.json~jsonpath', '$.data.rental_hours[*]']
-  #  s: http://example.com/calendars/$(start_time) # Todo generate id by concatenating, need function?
+  #  sources: system_hours_source
+  #  s: ex:calendars/$(start_time) # Todo generate id by concatenating, need function?
   #  po:
   #   - [a, gbfs:Calendar]
   system_calendar: # Todo: linken aan system + hoe id genereren? adhv. concatenatie start en end dates?
-    sources:
-      - ['system_calendar.json~jsonpath', '$.data.calendars[*]']
-    s: http://example.com/calendars/$(start_date) # Todo generate id by concatenating, need function?
+    sources: system_calendar_source
+    s: ex:calendars/$(start_date) # Todo generate id by concatenating, need function?
     po:
       - [a, gbfs:Calendar]
       - [gbfs:start_day, $(start_day)]
@@ -92,17 +113,15 @@ mappings:
       - [gbfs:end_month, $(end_month)]
       - [gbfs:end_year, $(end_year)]
   system_regions: 
-    sources:
-      - ['system_regions.json~jsonpath', '$.data.regions[*]']
-    s: http://example.com/regions/$(region_id)
+    sources: system_regions_source
+    s: ex:regions/$(region_id)
     po:
       - [a, gbfs:Region]
       - [gbfs:region_id, $(region_id)]
       - [gbfs:name, $(name)]
-  system_pricing_plans: # todo link to system?
-    sources:
-      - ['system_pricing_plans.json~jsonpath', '$.data.plans[*]']
-    s: http://example.com/plans/$(plan_id)
+  system_pricing_plans:
+    sources: system_pricing_plans_source
+    s: ex:plans/$(plan_id)
     po:
       - [a, gbfs:Plan]
       - [gbfs:plan_id, $(plan_id)]
@@ -112,10 +131,9 @@ mappings:
       - [gbfs:price, $(price), xsd:double]
       - [gbfs:is_taxable , $(is_taxable), xsd:boolean]
       - [rdfs:comment, $(description)]
-  system_alerts: # Todo: link to system
-    sources:
-      - ['system_alerts.json~jsonpath', '$.data.alerts[*]']
-    s: http://example.com/alerts/$(alert_id)
+  system_alerts:
+    sources: system_alerts_source
+    s: ex:alerts/$(alert_id)
     po:
       - [a, gbfs:Alert]
       - [gbfs:alert_id, $(alert_id)]
@@ -127,5 +145,3 @@ mappings:
       - [dcterms:abstract, $(summary)]
       - [rdfs:comment, $(description)]
       - [dcterms:modified, $(last_updated), xsd:integer]
-
-# VRAAG: duplicates
