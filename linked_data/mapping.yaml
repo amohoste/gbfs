@@ -4,20 +4,23 @@ prefixes:
   geo: "http://www.w3.org/2003/01/geo/wgs84_pos#"
 
 # VRAAG: last_updated en ttl, wat doe ik hier dan mee?
+# VRAAG: feed
 # TODO: last_updated and ttl
 # TODO: Moet je wanneer ik bijvoorbeeld een station identificeer op een bepaalde url ook geen data teruggeven wanneer die url wordt opgevraagd?
 # Wat doen met niet bestaande files?
 # TODO: scriptje te schrijven die de url etc invult?
+# Language: parse url
 
 mappings: 
   # gbfs: TODO + System
-  system_info: # Todo: language + language tag in file
+  system_info: # Todo: language
     sources:
       - ['system_information.json~jsonpath', '$.data']
     s: http://example.com/system/$(system_id)
     po:
       - [a, gbfs:System]
       - [gbfs:system_id, $(system_id)]
+      - [gbfs:language, $(language)]
       - [gbfs:name, $(name)]
       - [gbfs:short_name, $(short_name)]
       - [gbfs:operator, $(operator)]
@@ -41,12 +44,11 @@ mappings:
       - [geo:long, $(lon), xsd:double]
       - [geo:address, $(address)]
       - [gbfs:cross_street, $(cross_street)]
-      - [gbfs:region_id, $(region_id), xsd:integer] # VRAAG: maybe not string, but reference the region defined in regions?, dus geen region_id maar region
-                                                    # mag je er dan van uitgaan dat de url bv. example.com/regions/$(region_id) is? (hier zo gegenereerd)
+      - [gbfs:region, ex:regions/$(region_id)~iri] 
       - [vcard:postal-code, $(post_code)]
       - [gbfs:rental_method, gbfs:$(rental_methods)~iri]
       - [gbfs:capacity, $(capacity), xsd:integer]
-  station_status: # VRAAG: language + wanneer iets in een ander document herhaald wordt moet ik dit dat opnieuw mappen of is dit niet nodig (vb. station_id)
+  station_status: # TODO: language
     sources:
       - ['station_status.json~jsonpath', '$.data.stations[*]']
     s: http://example.com/station/$(station_id)
@@ -59,7 +61,8 @@ mappings:
       - [gbfs:is_renting, $(is_renting), xsd:boolean]
       - [gbfs:is_returning, $(is_returning), xsd:boolean]
       - [gbfs:last_reported, $(last_reported), xsd:integer]
-  #free_bike_status: # VRAAG: language + moet bike gelinkt worden aan system?, vb. system gbfs:bike <bikes/1>, moet dan manier vinden om identifier van system te vinden, kunnen bv. meerdere systems zijn?
+  #free_bike_status: # TODO: language 
+  # Vraag: moet bike gelinkt worden aan system?, vb. system gbfs:bike <bikes/1>, moet dan manier vinden om identifier van system te vinden, kunnen bv. meerdere systems zijn?
   # TOOD: kijken of variabelen mogelijk
   #  sources:
   #    - ['free_bike_status.json~jsonpath', '$.data.bikes[*]']
@@ -70,18 +73,28 @@ mappings:
   #    - [geo:long, $(lon), xsd:double]
   #    - [gbfs:is_reserved , $(is_reserved), xsd:boolean]
   #    - [gbfs:is_disabled , $(is_disabled), xsd:boolean]
-  # system_hours: TODO
+  # system_hours: # Todo
+  #  sources:
+  #    - ['system_hours.json~jsonpath', '$.data.rental_hours[*]']
+  #  s: http://example.com/calendars/$(start_time) # Todo generate id by concatenating, need function?
+  #  po:
+  #   - [a, gbfs:Calendar]
   system_calendar: # Todo: linken aan system + hoe id genereren? adhv. concatenatie start en end dates?
     sources:
       - ['system_calendar.json~jsonpath', '$.data.calendars[*]']
     s: http://example.com/calendars/$(start_date) # Todo generate id by concatenating, need function?
     po:
       - [a, gbfs:Calendar]
-      # VRAAG: Heb in plaats van start month, start day etc. start date gemaakt. Goed idee of toch beter niet?
+      - [gbfs:start_day, $(start_day)]
+      - [gbfs:start_month, $(start_month)]
+      - [gbfs:start_year, $(start_year)]
+      - [gbfs:end_day, $(end_day)]
+      - [gbfs:end_month, $(end_month)]
+      - [gbfs:end_year, $(end_year)]
   system_regions: 
     sources:
       - ['system_regions.json~jsonpath', '$.data.regions[*]']
-    s: http://example.com/regions/$(region_id) # Todo generate id by concatenating, need function?
+    s: http://example.com/regions/$(region_id)
     po:
       - [a, gbfs:Region]
       - [gbfs:region_id, $(region_id)]
@@ -89,7 +102,7 @@ mappings:
   system_pricing_plans: # todo link to system?
     sources:
       - ['system_pricing_plans.json~jsonpath', '$.data.plans[*]']
-    s: http://example.com/plans/$(plan_id) # Todo generate id by concatenating, need function?
+    s: http://example.com/plans/$(plan_id)
     po:
       - [a, gbfs:Plan]
       - [gbfs:plan_id, $(plan_id)]
@@ -102,15 +115,17 @@ mappings:
   system_alerts: # Todo: link to system
     sources:
       - ['system_alerts.json~jsonpath', '$.data.alerts[*]']
-    s: http://example.com/alerts/$(alert_id) # Todo generate id by concatenating, need function?
+    s: http://example.com/alerts/$(alert_id)
     po:
       - [a, gbfs:Alert]
       - [gbfs:alert_id, $(alert_id)]
       - [gbfs:alertType, gbfs:$(type)~iri]
       # times: todo
-      - [gbfs:station_id, $(station_ids)]
-      - [gbfs:region_id, $(region_ids)]
+      - [gbfs:station, ex:stations/$(station_ids)~iri]
+      - [gbfs:region, ex:regions/$(region_ids)]
       - [gbfs:url, $(url)]
-      - [dct:abstract, $(summary)]
+      - [dcterms:abstract, $(summary)]
       - [rdfs:comment, $(description)]
-      - [dct:modified, $(last_updated), xsd:integer]
+      - [dcterms:modified, $(last_updated), xsd:integer]
+
+# VRAAG: duplicates

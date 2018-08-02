@@ -120,12 +120,12 @@ rental_hours       | gbfs:rental_hour
 Field Name          |  Linked data
 --------------------| ----------
 calendars           |  gbfs:calendar 
-\- start_month       | gbfs:start_date
-\- start_day         | gbfs:start_date
-\- start_year        | gbfs:start_date
-\- end_month         | gbfs:end_date
-\- end_day           | gbfs:end_date
-\- end_year          | gbfs:end_date
+\- start_month       | gbfs:start_month
+\- start_day         | gbfs:start_day
+\- start_year        | gbfs:start_year
+\- end_month         | gbfs:end_month
+\- end_day           | gbfs:end_day
+\- end_year          | gbfs:end_year
 
 ### system_regions.json
 > A class Region has been added

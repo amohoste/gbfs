@@ -72,6 +72,16 @@ gbfs:system_id a rdf:Property ;
               rdfs:seeAlso <https://github.com/amohoste/gbfs/blob/master/gbfs.md#system_informationjson> ;
               rdfs:subPropertyOf dct:identifier .
 
+gbfs:language a rdf:Property ;
+              status:term_status "unstable"@en ;
+              rdfs:label "System language"@en ;
+              rdfs:comment "Language information about this system is published in."@en ;
+              owl:equivalentProperty dct:language ;
+              rdfs:domain gbfs:System ;
+              rdfs:range xsd:string ;
+              rdfs:seeAlso <https://github.com/amohoste/gbfs/blob/master/gbfs.md#system_informationjson> ;
+              rdfs:subPropertyOf dct:identifier .
+
 gbfs:name a rdf:Property ;
                status:term_status "unstable"@en ;
                rdfs:label "Name"@en ;
@@ -153,6 +163,14 @@ gbfs:license_url a rdf:Property ;
              rdfs:seeAlso <https://github.com/amohoste/gbfs/blob/master/gbfs.md#system_informationjson> ;
              rdfs:domain gbfs:System ;
              rdfs:range xsd:string .
+
+gbfs:station a rdf:Property ;
+              status:term_status "unstable"@en ;
+              rdfs:label "Alert station"@en ;
+              rdfs:comment "Station affected by an alert"@en ;
+              rdfs:domain gbfs:Alert ;
+              rdfs:range xsd:Station ;
+              rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#system_hoursjson> .
 
 gbfs:Station a rdfs:Class ;
             status:term_status "unstable"@en ;
@@ -463,21 +481,53 @@ gbfs:Calendar a rdfs:Class ;
                rdfs:comment "Describes the system operational calendar"@en ;
                rdfs:seeAlso <https://github.com/amohoste/gbfs/blob/master/gbfs.md#system_informationjson> .
 
-gbfs:start_date a rdf:Property ;
+gbfs:start_day a rdf:Property ;
                status:term_status "unstable"@en ;
-               rdfs:label "Start date"@en ;
-               rdfs:comment "System calendar start date"@en ;
+               rdfs:label "Start day"@en ;
+               rdfs:comment "System calendar start day"@en ;
                rdfs:seeAlso <https://github.com/amohoste/gbfs/blob/master/gbfs.md#system_informationjson> ;
                rdfs:domain gbfs:calendar ;
-               rdfs:range xsd:date .
+               rdfs:range xsd:integer .
 
-gbfs:end_date a rdf:Property ;
+gbfs:start_month a rdf:Property ;
                status:term_status "unstable"@en ;
-               rdfs:label "End date"@en ;
-               rdfs:comment "System calendar end date"@en ;
+               rdfs:label "Start day"@en ;
+               rdfs:comment "System calendar start month"@en ;
                rdfs:seeAlso <https://github.com/amohoste/gbfs/blob/master/gbfs.md#system_informationjson> ;
                rdfs:domain gbfs:calendar ;
-               rdfs:range xsd:date .
+               rdfs:range xsd:integer .
+
+gbfs:start_year a rdf:Property ;
+               status:term_status "unstable"@en ;
+               rdfs:label "Start day"@en ;
+               rdfs:comment "System calendar start year"@en ;
+               rdfs:seeAlso <https://github.com/amohoste/gbfs/blob/master/gbfs.md#system_informationjson> ;
+               rdfs:domain gbfs:calendar ;
+               rdfs:range xsd:integer .
+
+gbfs:end_day a rdf:Property ;
+               status:term_status "unstable"@en ;
+               rdfs:label "End day"@en ;
+               rdfs:comment "System calendar end day"@en ;
+               rdfs:seeAlso <https://github.com/amohoste/gbfs/blob/master/gbfs.md#system_informationjson> ;
+               rdfs:domain gbfs:calendar ;
+               rdfs:range xsd:integer .
+
+gbfs:end_month a rdf:Property ;
+               status:term_status "unstable"@en ;
+               rdfs:label "End month"@en ;
+               rdfs:comment "System calendar end month"@en ;
+               rdfs:seeAlso <https://github.com/amohoste/gbfs/blob/master/gbfs.md#system_informationjson> ;
+               rdfs:domain gbfs:calendar ;
+               rdfs:range xsd:integer .
+
+gbfs:end_year a rdf:Property ;
+               status:term_status "unstable"@en ;
+               rdfs:label "End year"@en ;
+               rdfs:comment "System calendar end year"@en ;
+               rdfs:seeAlso <https://github.com/amohoste/gbfs/blob/master/gbfs.md#system_informationjson> ;
+               rdfs:domain gbfs:calendar ;
+               rdfs:range xsd:integer .
 
 gbfs:Region a rdfs:Class ;
             owl:equivalentProperty vcard:region ;
@@ -489,8 +539,10 @@ gbfs:Region a rdfs:Class ;
 gbfs:region a rdf:Property ;
               status:term_status "unstable"@en ;
               rdfs:label "Region"@en ;
-              rdfs:comment "Region belonging to a system"@en ;
-              rdfs:domain gbfs:System ;
+              rdfs:comment "Region of the given subject"@en ;
+              rdfs:domain gbfs:System ,
+                          gbfs:Station ,
+                          gbfs:Alert ;
               rdfs:range gbfs:Region ;
               rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#system_regionsjson> .
 
