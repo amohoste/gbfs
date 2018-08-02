@@ -3,6 +3,7 @@ prefixes:
   ex: "http://example.com/"
   geo: "http://www.w3.org/2003/01/geo/wgs84_pos#"
 
+# VRAAG: last_updated en ttl, wat doe ik hier dan mee?
 # TODO: last_updated and ttl
 # TODO: Moet je wanneer ik bijvoorbeeld een station identificeer op een bepaalde url ook geen data teruggeven wanneer die url wordt opgevraagd?
 # Wat doen met niet bestaande files?
@@ -77,7 +78,14 @@ mappings:
     po:
       - [a, gbfs:Calendar]
       # VRAAG: Heb in plaats van start month, start day etc. start date gemaakt. Goed idee of toch beter niet?
-  # system_regions: TODO add support for region name
+  system_regions: 
+    sources:
+      - ['system_regions.json~jsonpath', '$.data.regions[*]']
+    s: http://example.com/regions/$(region_id) # Todo generate id by concatenating, need function?
+    po:
+      - [a, gbfs:Region]
+      - [gbfs:region_id, $(region_id)]
+      - [gbfs:name, $(name)]
   system_pricing_plans: # todo link to system?
     sources:
       - ['system_pricing_plans.json~jsonpath', '$.data.plans[*]']
