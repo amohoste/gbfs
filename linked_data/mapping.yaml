@@ -4,8 +4,12 @@ prefixes:
   geo: "http://www.w3.org/2003/01/geo/wgs84_pos#"
 
 # TODO: last_updated and ttl
+# Algemene vraag, moet je wanneer ik bijvoorbeeld een station identificeer op een bepaalde url ook geen data teruggeven wanneer die url wordt opgevraagd?
+# Wat doen met niet bestaande files?
+# Misschien goed idee om scriptje te schrijven die de url etc invult?
+
 mappings: 
-  gbfs: # TODO + System
+  # gbfs: TODO + System
   system_info: # Todo: language + language tag in file
     sources:
       - ['system_information.json~jsonpath', '$.data']
@@ -36,7 +40,8 @@ mappings:
       - [geo:long, $(lon), xsd:double]
       - [geo:address, $(address)]
       - [gbfs:cross_street, $(cross_street)]
-      - [gbfs:region_id, $(region_id), xsd:integer] # TODO: maybe not string
+      - [gbfs:region_id, $(region_id), xsd:integer] # TODO: maybe not string, but reference the region defined in regions?, dus geen region_id maar region
+                                                    # mag je er dan van uitgaan dat de url bv. example.com/regions/$(region_id) is? (hier zo gegenereerd)
       - [vcard:postal-code, $(post_code)]
       - [gbfs:rental_method, gbfs:$(rental_methods)~iri]
       - [gbfs:capacity, $(capacity), xsd:integer]
@@ -53,3 +58,50 @@ mappings:
       - [gbfs:is_renting, $(is_renting), xsd:boolean]
       - [gbfs:is_returning, $(is_returning), xsd:boolean]
       - [gbfs:last_reported, $(last_reported), xsd:integer]
+  #free_bike_status: # Todo: language + moet bike gelinkt worden aan system?, vb. system gbfs:bike <bikes/1>, moet dan manier vinden om identifier van system te vinden, kunnen bv. meerdere systems zijn?
+  #  sources:
+  #    - ['free_bike_status.json~jsonpath', '$.data.bikes[*]']
+  #  s: http://example.com/bikes/$(bike_id)
+  #  po:
+  #    - [gbfs:bike_id, $(bike_id)]
+  #    - [geo:lat, $(lat), xsd:double]
+  #    - [geo:long, $(lon), xsd:double]
+  #    - [gbfs:is_reserved , $(is_reserved), xsd:boolean]
+  #    - [gbfs:is_disabled , $(is_disabled), xsd:boolean]
+  # system_hours: TODO
+  system_calendar: # Todo: linken aan system + hoe id genereren? adhv. concatenatie start en end dates?
+    sources:
+      - ['system_calendar.json~jsonpath', '$.data.calendars[*]']
+    s: http://example.com/calendars/$(start_date) # Todo generate id by concatenating, need function?
+    po:
+      - [a, gbfs:Calendar]
+      # Heb in plaats van start month, start day etc. start date gemaakt. Goed idee of toch beter niet?
+  # system_regions: TODO add support for region name
+  system_pricing_plans: # todo link to system?
+    sources:
+      - ['system_pricing_plans.json~jsonpath', '$.data.plans[*]']
+    s: http://example.com/plans/$(plan_id) # Todo generate id by concatenating, need function?
+    po:
+      - [a, gbfs:Plan]
+      - [gbfs:plan_id, $(plan_id)]
+      - [gbfs:url, $(url)]
+      - [gbfs:name, $(name)]
+      - [gbfs:currency, $(currency)]
+      - [gbfs:price, $(price), xsd:double]
+      - [gbfs:is_taxable , $(is_taxable), xsd:boolean]
+      - [rdfs:comment, $(description)]
+  system_alerts: # Todo: link to system
+    sources:
+      - ['system_alerts.json~jsonpath', '$.data.alerts[*]']
+    s: http://example.com/alerts/$(alert_id) # Todo generate id by concatenating, need function?
+    po:
+      - [a, gbfs:Alert]
+      - [gbfs:alert_id, $(alert_id)]
+      - [gbfs:alertType, gbfs:$(type)~iri]
+      # times: todo
+      - [gbfs:station_id, $(station_ids)]
+      - [gbfs:region_id, $(region_ids)]
+      - [gbfs:url, $(url)]
+      - [dct:abstract, $(summary)]
+      - [rdfs:comment, $(description)]
+      - [dct:modified, $(last_updated), xsd:integer]

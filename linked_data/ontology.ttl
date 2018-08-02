@@ -479,8 +479,8 @@ gbfs:end_date a rdf:Property ;
 
 gbfs:Plan a rdf:Property ;
               status:term_status "unstable"@en ;
-              rdfs:label "Plan"@en ;
-              rdfs:comment "Plan belonging to a system"@en ;
+              rdfs:label "Pricing plan"@en ;
+              rdfs:comment "Pricing plan belonging to a system"@en ;
               rdfs:domain gbfs:System ;
               rdfs:range gbfs:Plan ;
               rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#system_pricing_plansjson> .
@@ -524,7 +524,7 @@ gbfs:is_taxable a rdf:Property ;
               rdfs:range xsd:boolean ;
               rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#system_pricing_plansjson> .
 
-gbfs:Alert a rdf:Property ;
+gbfs:alert a rdf:Property ;
               status:term_status "unstable"@en ;
               rdfs:label "Alert"@en ;
               rdfs:comment "Alert belonging to a system"@en ;
