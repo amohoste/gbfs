@@ -354,6 +354,32 @@ gbfs:RentalHour a rdfs:Class ;
             rdfs:comment "Represent rental hours on a sepcific day"@en ;
             rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#system_hoursjson> .
 
+gbfs:UserType a rdfs:Class ;
+            status:term_status "unstable"@en ;
+            rdfs:label "User type"@en ;
+            rdfs:comment "Represents a system user type"@en ;
+            rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#system_hoursjson> .
+
+gbfs:user_type a rdf:Property ;
+               status:term_status "unstable"@en ;
+               rdfs:label "User type"@en ;
+               rdfs:comment "User type of a rental hour"@en ;
+               rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#system_hoursjson> ;
+               rdfs:domain gbfs:RentalHour ;
+               rdfs:range gbfs:UserType .
+
+gbfs:member a gbfs:UserType ;
+            status:term_status "unstable"@en ;
+            rdfs:label "Member"@en ;
+            rdfs:comment "A system member"@en ;
+            rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#system_hoursjson> .
+
+gbfs:nonmember a gbfs:UserType ;
+            status:term_status "unstable"@en ;
+            rdfs:label "Non member"@en ;
+            rdfs:comment "Not a system member"@en ;
+            rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#system_hoursjson> .
+
 gbfs:day a rdf:Property ;
                status:term_status "unstable"@en ;
                rdfs:label "Day"@en ;
@@ -417,14 +443,6 @@ gbfs:sun a gbfs:WeekDay ;
             rdfs:label "Sunday"@en ;
             rdfs:comment "The day sunday"@en ;
             rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#system_hoursjson> .       
-
-gbfs:is_member a rdf:Property ;
-               status:term_status "unstable"@en ;
-               rdfs:label "Rental hours members"@en ;
-               rdfs:comment "String indicating the rental hours for members on a certain day, format: 'day hh:mm:ss - hh:mm:ss' with day the abbreviation of the first 3 letter of the given day, eig. mon."@en ;
-               rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#system_hoursjson> ;
-               rdfs:domain gbfs:RentalHour ;
-               rdfs:range xsd:boolean .
 
 gbfs:start_time a rdf:Property ;
                status:term_status "unstable"@en ;

@@ -16,27 +16,27 @@ sources:
     access: station_status.json
     referenceFormulation: jsonpath
     iterator: $.data.stations[*]
-  free_bike_status_source:
+  free_bike_status_source: # Optional
     access: free_bike_status.json
     referenceFormulation: jsonpath
     iterator: $.data.bikes[*]
-  system_hours_source:
+  system_hours_source: # Optional
     access: system_hours.json
     referenceFormulation: jsonpath
     iterator: $.data.rental_hours[*]
-  system_calendar_source:
+  system_calendar_source: # Optional
     access: system_calendar.json
     referenceFormulation: jsonpath
     iterator: $.data.calendars[*]
-  system_regions_source:
+  system_regions_source: # Optional
     access: system_regions.json
     referenceFormulation: jsonpath
     iterator: $.data.regions[*]
-  system_pricing_plans_source:
+  system_pricing_plans_source: # Optional
     access: system_pricing_plans.json
     referenceFormulation: jsonpath
     iterator: $.data.plans[*]
-  system_alerts_source:
+  system_alerts_source: # Optional
     access: system_alerts.json
     referenceFormulation: jsonpath
     iterator: $.data.alerts[*]
@@ -96,11 +96,15 @@ mappings:
       - [geo:long, $(lon), xsd:double]
       - [gbfs:is_reserved , $(is_reserved), xsd:boolean]
       - [gbfs:is_disabled , $(is_disabled), xsd:boolean]
-  # system_hours: # Todo
-  #  sources: system_hours_source
-  #  s: ex:calendars/$(start_time) # Todo generate id by concatenating, need function?
-  #  po:
-  #   - [a, gbfs:Calendar]
+  system_hours: # Todo
+    sources: system_hours_source
+    s: ex:system_hours/tochange # Todo generate id by concatenating, need function?
+    po:
+     - [a, gbfs:RentalHour]
+     - [gbfs:user_type, gbfs:$(user_types)~iri]
+     - [gbfs:day, gbfs:$(days)~iri]
+     - [gbfs:start_time, $(start_time), xsd:time]
+     - [gbfs:end_time, $(end_time), xsd:time]
   system_calendar: # Todo: linken aan system + hoe id genereren? adhv. concatenatie start en end dates?
     sources: system_calendar_source
     s: ex:calendars/$(start_date) # Todo generate id by concatenating, need function?
@@ -138,6 +142,8 @@ mappings:
       - [a, gbfs:Alert]
       - [gbfs:alert_id, $(alert_id)]
       - [gbfs:alertType, gbfs:$(type)~iri]
+      #- p: gbfs:alertTime
+      #  o: 
       # times: todo
       - [gbfs:station, ex:stations/$(station_ids)~iri]
       - [gbfs:region, ex:regions/$(region_ids)]
@@ -145,3 +151,16 @@ mappings:
       - [dcterms:abstract, $(summary)]
       - [rdfs:comment, $(description)]
       - [dcterms:modified, $(last_updated), xsd:integer]
+ # alert_time:
+  #  sources: system_alerts_source
+   # s: ex:alerts/alert_times/ # change
+    #po:
+#
+ #   sources:
+  #    - ['movies.csv~csv']
+   # s: http://example.com/movie/$(slug)
+    #po:
+     # - [a, schema:Movie]
+     # - [schema:name, $(title)]
+     # - [ex:year, $(year)]
+      

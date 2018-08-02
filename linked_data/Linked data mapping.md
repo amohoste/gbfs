@@ -104,11 +104,12 @@ bikes             | Left out
 
 ### system_hours.json
 
+> Classes gbfs:WeekDay and gbfs:UserType have been added
 
 Field Name          | Linked data
 --------------------| ----------
 rental_hours       | gbfs:rental_hour
-\- user_types        | gbfs:is_member
+\- user_types        | gbfs:user_type
 \- days              | gbfs:day
 \- start_time        | gbfs:start_time
 \- end_time          | gbfs:end_time
