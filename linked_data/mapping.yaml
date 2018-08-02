@@ -198,13 +198,13 @@ mappings:
       - [dcterms:modified, $(last_updated), xsd:integer]
       - p: gbfs:alertTime
         o: 
-         - mapping: movie
+         - mapping: system_alerts_times
            condition:
             function: equal
             parameters:
               - [str1, $(alert_id)]
               - [str2, $(times_alert_id)] # TODO: insert times_alert_id for each alert before feeding to yarrrml
-    movie:
+  system_alerts_times:
     sources: system_alerts_times_source
     s: ex:alerts/times/$(times_alert_id)-$(start)-$(end)
     po:
