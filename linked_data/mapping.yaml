@@ -3,8 +3,27 @@ prefixes:
   ex: "http://example.com/"
   geo: "http://www.w3.org/2003/01/geo/wgs84_pos#"
 
-mappings:
-  person:
+# TODO: last_updated and ttl
+mappings: 
+  gbfs: # TODO + System
+  system_info: # Todo: language + language tag in file
+    sources:
+      - ['system_information.json~jsonpath', '$.data']
+    s: http://example.com/system/$(system_id)
+    po:
+      - [a, gbfs:System]
+      - [gbfs:system_id, $(system_id)]
+      - [gbfs:name, $(name)]
+      - [gbfs:short_name, $(short_name)]
+      - [gbfs:operator, $(operator)]
+      - [gbfs:url, $(url)]
+      - [gbfs:purchase_url, $(purchase_url)]
+      - [gbfs:start_date, $(start_date)]
+      - [foaf:phone, $(phone_number)]
+      - [foaf:mbox, $(email)]
+      - [gbfs:timezone, $(timezone)]
+      - [gbfs:license_url, $(license_url)]
+  station_info: # Todo: language
     sources:
       - ['station_information.json~jsonpath', '$.data.stations[*]']
     s: http://example.com/station/$(station_id)
@@ -17,7 +36,20 @@ mappings:
       - [geo:long, $(lon), xsd:double]
       - [geo:address, $(address)]
       - [gbfs:cross_street, $(cross_street)]
-      - [gbfs:region_id, $(region_id), xsd:integer]
+      - [gbfs:region_id, $(region_id), xsd:integer] # TODO: maybe not string
       - [vcard:postal-code, $(post_code)]
-      - [gbfs:rental_method, ex:$(rental_methods)~iri] # TODO: use function
+      - [gbfs:rental_method, gbfs:$(rental_methods)~iri]
       - [gbfs:capacity, $(capacity), xsd:integer]
+  station_status: # Todo: language + wanneer iets in een ander document herhaald wordt moet ik dit dat opnieuw mappen of is dit niet nodig (vb. station_id)
+    sources:
+      - ['station_status.json~jsonpath', '$.data.stations[*]']
+    s: http://example.com/station/$(station_id)
+    po:
+      - [gbfs:num_bikes_available, $(num_bikes_available), xsd:integer]
+      - [gbfs:num_bikes_disabled, $(num_bikes_disabled), xsd:integer]
+      - [gbfs:num_docks_available, $(num_docks_available), xsd:integer]
+      - [gbfs:num_docks_disabled, $(num_docks_disabled), xsd:integer]
+      - [gbfs:is_installed, $(is_installed), xsd:boolean] # volgens de xml schema specificatie zijn 0 en 1 ook geldige waarden
+      - [gbfs:is_renting, $(is_renting), xsd:boolean]
+      - [gbfs:is_returning, $(is_returning), xsd:boolean]
+      - [gbfs:last_reported, $(last_reported), xsd:integer]

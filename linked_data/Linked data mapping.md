@@ -50,7 +50,7 @@ purchase_url      | gbfs:purchase_url
 start_date        | gbfs:start_date
 phone_number      | foaf:phone
 email             | foaf:mbox
-timezone          | transit:timezone
+timezone          | gbfs:timezone
 license_url       | gbfs:license_url
 
 

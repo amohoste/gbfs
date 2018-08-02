@@ -135,6 +135,14 @@ gbfs:start_date a rdf:Property ;
              rdfs:domain gbfs:System ;
              rdfs:range xsd:string .	
 
+gbfs:timeZone a rdf:Property ;
+              status:term_status "unstable"@en ;
+              owl:equivalentProperty transit:timezone ;
+              rdfs:label "Time zone"@en ;
+              rdfs:comment "The time zone where the system is located."@en ;
+              rdfs:seeAlso <https://github.com/amohoste/gbfs/blob/master/gbfs.md#system_informationjson> ;
+              rdfs:seeAlso <http://en.wikipedia.org/wiki/List_of_tz_database_time_zones> .
+
 gbfs:license_url a rdf:Property ;
              status:term_status "unstable"@en ;
              rdfs:subPropertyOf foaf:page ;
