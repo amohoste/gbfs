@@ -79,11 +79,13 @@ gbfs:name a rdf:Property ;
                rdfs:seeAlso <https://github.com/amohoste/gbfs/blob/master/gbfs.md#system_informationjson> ,
                             <https://github.com/NABSA/gbfs/blob/master/gbfs.md#system_pricing_plansjson> ,
                             <https://github.com/NABSA/gbfs/blob/master/gbfs.md#station_informationjson> ,
-                            <https://github.com/NABSA/gbfs/blob/master/gbfs.md#gbfsjson> ;
+                            <https://github.com/NABSA/gbfs/blob/master/gbfs.md#gbfsjson> ,
+                            <https://github.com/NABSA/gbfs/blob/master/gbfs.md#system_regionsjson> ;
                rdfs:subPropertyOf dct:title ;
                rdfs:domain gbfs:System ,
                            gbfs:Plan ,
-                           gbfs:Feed ;
+                           gbfs:Feed ,
+                           gbfs:Region ;
                rdfs:range xsd:string .
 
 gbfs:short_name a rdf:Property ;
@@ -133,7 +135,7 @@ gbfs:start_date a rdf:Property ;
              rdfs:comment "Represents the date that the system began operations"@en ;
              rdfs:seeAlso <https://github.com/amohoste/gbfs/blob/master/gbfs.md#system_informationjson> ;
              rdfs:domain gbfs:System ;
-             rdfs:range xsd:string .	
+             rdfs:range xsd:date .	
 
 gbfs:timeZone a rdf:Property ;
               status:term_status "unstable"@en ;
@@ -477,7 +479,31 @@ gbfs:end_date a rdf:Property ;
                rdfs:domain gbfs:calendar ;
                rdfs:range xsd:date .
 
-gbfs:Plan a rdf:Property ;
+gbfs:Region a rdfs:Class ;
+            owl:equivalentProperty vcard:region ;
+            status:term_status "unstable"@en ;
+            rdfs:label "System region"@en ;
+            rdfs:comment "Describe regions for a system that is broken up by geographic or political region"@en ;
+            rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#system_regionsjson> .
+
+gbfs:region a rdf:Property ;
+              status:term_status "unstable"@en ;
+              rdfs:label "Region"@en ;
+              rdfs:comment "Region belonging to a system"@en ;
+              rdfs:domain gbfs:System ;
+              rdfs:range gbfs:Region ;
+              rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#system_regionsjson> .
+
+gbfs:region_id a rdf:Property ;
+              status:term_status "unstable"@en ;
+              rdfs:label "Region ID"@en ;
+              rdfs:comment "Unique identifier for the region"@en ;
+              rdfs:domain gbfs:Region ;
+              rdfs:range xsd:string ;
+              rdfs:seeAlso <https://github.com/NABSA/gbfs/blob/master/gbfs.md#system_regionsjson> ;
+              rdfs:subPropertyOf dct:identifier .
+
+gbfs:plan a rdf:Property ;
               status:term_status "unstable"@en ;
               rdfs:label "Pricing plan"@en ;
               rdfs:comment "Pricing plan belonging to a system"@en ;

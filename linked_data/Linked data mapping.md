@@ -105,7 +105,7 @@ bikes             | Left out
 ### system_hours.json
 
 
-Field Name          | RDefines
+Field Name          | Linked data
 --------------------| ----------
 rental_hours       | gbfs:rental_hour
 \- user_types        | gbfs:is_member
@@ -117,7 +117,7 @@ rental_hours       | gbfs:rental_hour
 
 > A class gbfs:Calendar has been added
 
-Field Name          |  Defines
+Field Name          |  Linked data
 --------------------| ----------
 calendars           |  gbfs:calendar 
 \- start_month       | gbfs:start_date
@@ -128,14 +128,20 @@ calendars           |  gbfs:calendar
 \- end_year          | gbfs:end_date
 
 ### system_regions.json
-> Replaced by vcard:region
+> A class Region has been added
+
+Field Name        | Linked data
+------------------| ----------
+regions           | Left out
+\- region_id       | gbfs:region_id
+\- name           | gbfs:name
 
 ### system_pricing_plans.json
 
 > A class gbfs:Plan has been added to describe a pricing plan
 
 
-Field Name        | Defines
+Field Name        | Linked data
 ------------------| ----------
 plans             | Left out
 \- plan_id         | gbfs:plan_id
@@ -149,7 +155,7 @@ plans             | Left out
 ### system_alerts.json
 > A class gbfs:Alert has been added to describe an alert
 
-Field Name        | Defines
+Field Name        | Linked data
 ----------------- | ----------
 alerts            | Left out
 \- alert_id        | gbfs:alert_id

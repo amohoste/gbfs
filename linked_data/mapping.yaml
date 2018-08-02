@@ -4,9 +4,9 @@ prefixes:
   geo: "http://www.w3.org/2003/01/geo/wgs84_pos#"
 
 # TODO: last_updated and ttl
-# Algemene vraag, moet je wanneer ik bijvoorbeeld een station identificeer op een bepaalde url ook geen data teruggeven wanneer die url wordt opgevraagd?
+# TODO: Moet je wanneer ik bijvoorbeeld een station identificeer op een bepaalde url ook geen data teruggeven wanneer die url wordt opgevraagd?
 # Wat doen met niet bestaande files?
-# Misschien goed idee om scriptje te schrijven die de url etc invult?
+# TODO: scriptje te schrijven die de url etc invult?
 
 mappings: 
   # gbfs: TODO + System
@@ -22,7 +22,7 @@ mappings:
       - [gbfs:operator, $(operator)]
       - [gbfs:url, $(url)]
       - [gbfs:purchase_url, $(purchase_url)]
-      - [gbfs:start_date, $(start_date)]
+      - [gbfs:start_date, $(start_date), xsd:]
       - [foaf:phone, $(phone_number)]
       - [foaf:mbox, $(email)]
       - [gbfs:timezone, $(timezone)]
@@ -40,12 +40,12 @@ mappings:
       - [geo:long, $(lon), xsd:double]
       - [geo:address, $(address)]
       - [gbfs:cross_street, $(cross_street)]
-      - [gbfs:region_id, $(region_id), xsd:integer] # TODO: maybe not string, but reference the region defined in regions?, dus geen region_id maar region
+      - [gbfs:region_id, $(region_id), xsd:integer] # VRAAG: maybe not string, but reference the region defined in regions?, dus geen region_id maar region
                                                     # mag je er dan van uitgaan dat de url bv. example.com/regions/$(region_id) is? (hier zo gegenereerd)
       - [vcard:postal-code, $(post_code)]
       - [gbfs:rental_method, gbfs:$(rental_methods)~iri]
       - [gbfs:capacity, $(capacity), xsd:integer]
-  station_status: # Todo: language + wanneer iets in een ander document herhaald wordt moet ik dit dat opnieuw mappen of is dit niet nodig (vb. station_id)
+  station_status: # VRAAG: language + wanneer iets in een ander document herhaald wordt moet ik dit dat opnieuw mappen of is dit niet nodig (vb. station_id)
     sources:
       - ['station_status.json~jsonpath', '$.data.stations[*]']
     s: http://example.com/station/$(station_id)
@@ -54,11 +54,12 @@ mappings:
       - [gbfs:num_bikes_disabled, $(num_bikes_disabled), xsd:integer]
       - [gbfs:num_docks_available, $(num_docks_available), xsd:integer]
       - [gbfs:num_docks_disabled, $(num_docks_disabled), xsd:integer]
-      - [gbfs:is_installed, $(is_installed), xsd:boolean] # volgens de xml schema specificatie zijn 0 en 1 ook geldige waarden
+      - [gbfs:is_installed, $(is_installed), xsd:boolean]
       - [gbfs:is_renting, $(is_renting), xsd:boolean]
       - [gbfs:is_returning, $(is_returning), xsd:boolean]
       - [gbfs:last_reported, $(last_reported), xsd:integer]
-  #free_bike_status: # Todo: language + moet bike gelinkt worden aan system?, vb. system gbfs:bike <bikes/1>, moet dan manier vinden om identifier van system te vinden, kunnen bv. meerdere systems zijn?
+  #free_bike_status: # VRAAG: language + moet bike gelinkt worden aan system?, vb. system gbfs:bike <bikes/1>, moet dan manier vinden om identifier van system te vinden, kunnen bv. meerdere systems zijn?
+  # TOOD: kijken of variabelen mogelijk
   #  sources:
   #    - ['free_bike_status.json~jsonpath', '$.data.bikes[*]']
   #  s: http://example.com/bikes/$(bike_id)
@@ -75,7 +76,7 @@ mappings:
     s: http://example.com/calendars/$(start_date) # Todo generate id by concatenating, need function?
     po:
       - [a, gbfs:Calendar]
-      # Heb in plaats van start month, start day etc. start date gemaakt. Goed idee of toch beter niet?
+      # VRAAG: Heb in plaats van start month, start day etc. start date gemaakt. Goed idee of toch beter niet?
   # system_regions: TODO add support for region name
   system_pricing_plans: # todo link to system?
     sources:
