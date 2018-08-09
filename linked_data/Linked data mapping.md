@@ -16,11 +16,11 @@ Instead of having multiple files, a certain resource can be described in multipl
 Every JSON file presented in this specification contains the same common header information at the top level of the JSON response object:
 
 
-Field Name          | Required  | Linked Data
---------------------| ----------| ----------
-last_updated        | Yes       | gbfs:last_updated
-ttl                 | Yes       | gbfs:ttl
-data                | Yes       | Left out
+Field Name          | Linked Data
+--------------------| ----------
+last_updated        | gbfs:last_updated
+ttl                 | gbfs:ttl
+data                | Left out
 
 
 ### gbfs.json
